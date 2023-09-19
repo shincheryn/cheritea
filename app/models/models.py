@@ -67,7 +67,13 @@ class Order(db.Model):
         }
 
     # Relationships
-    order_toppings = db.relationship("Topping", secondary=order_toppings, back_populates="topping_orders")
+    order_toppings = db.relationship(
+        "Topping",
+        secondary=order_toppings,
+        primaryjoin=(id == order_toppings.c.orderId),
+        secondaryjoin=(id == order_toppings.c.toppingId),
+        back_populates="topping_orders"
+    )
     user = db.relationship("User", back_populates="user_orders")
 
 
@@ -123,8 +129,14 @@ class Topping(db.Model):
         }
 
     # Relationships
-    topping_orders = db.relationship("Order", secondary=order_toppings, back_populates="order_toppings")
-
+    topping_orders = db.relationship(
+        "Order",
+        secondary=order_toppings,
+        primaryjoin=(id == order_toppings.c.toppingId),
+        secondaryjoin=(id == order_toppings.c.orderId),
+        back_populates="order_toppings"
+    )
+    
 
 # Drink Model
 class Drink(db.Model):
