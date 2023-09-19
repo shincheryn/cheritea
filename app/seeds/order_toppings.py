@@ -1,24 +1,23 @@
-# from app.models import db, songs_data, environment, SCHEMA
+# from app.models import db, playlist_songs, environment, SCHEMA
 # from sqlalchemy.sql import text
 
-# # Adds a demo user, you can add other users here if you want
-# def seed_songs():
-#     songs_data = [
-#             {'song_name': 'Song 1', 'userId': 1, 'genre': 'Pop', 'image_url': 'url1', 'song_url': 'url1'},
-#             {'song_name': 'Song 2', 'userId': 1, 'genre': 'Rock', 'image_url': 'url2', 'song_url': 'url2'},
-#             {'song_name': 'Song 3', 'userId': 1, 'genre': 'Country', 'image_url': 'url3', 'song_url': 'url3'},
-#             {'song_name': 'Song 4', 'userId': 1, 'genre': 'Hip hop', 'image_url': 'url4', 'song_url': 'url4'},
-#             {'song_name': 'Song 5', 'userId': 2, 'genre': 'R&B', 'image_url': 'url5', 'song_url': 'url5'},
-#             {'song_name': 'Song 6', 'userId': 2, 'genre': 'Electronic', 'image_url': 'url6', 'song_url': 'url6'},
-#             {'song_name': 'Song 7', 'userId': 2, 'genre': 'Metal', 'image_url': 'url7', 'song_url': 'url7'},
-#             {'song_name': 'Song 8', 'userId': 2, 'genre': 'Funk', 'image_url': 'url8', 'song_url': 'url8'},
-#             {'song_name': 'Song 9', 'userId': 3, 'genre': 'K-pop', 'image_url': 'url9', 'song_url': 'url9'},
-#             {'song_name': 'Song 10', 'userId': 3, 'genre': 'Alternative rock', 'image_url': 'url10', 'song_url': 'url10'},
-#             {'song_name': 'Song 11', 'userId': 3, 'genre': 'Synth-pop', 'image_url': 'url11', 'song_url': 'url11'},
-#             {'song_name': 'Song 12', 'userId': 3, 'genre': 'Pop rock', 'image_url': 'url12', 'song_url': 'url12'}
-#         ]
-#     for song in songs_data:
-#         db.session.add(**song)
+# def seed_playlist_songs():
+#     playlist_songs_data = [
+#             {'playlistId': 1, 'songId': 1},
+#             {'playlistId': 1, 'songId': 2},
+#             {'playlistId': 1, 'songId': 3},
+#             {'playlistId': 2, 'songId': 4},
+#             {'playlistId': 2, 'songId': 5},
+#             {'playlistId': 2, 'songId': 6},
+#             {'playlistId': 5, 'songId': 7},
+#             {'playlistId': 6, 'songId': 8},
+#             {'playlistId': 3, 'songId': 9},
+#             {'playlistId': 3, 'songId': 10},
+#             {'playlistId': 3, 'songId': 11},
+#             {'playlistId': 4, 'songId': 12}
+#     ]
+#     for playlist_song in playlist_songs_data:
+#         db.session.add(*playlist_song)
 #     db.session.commit()
 
 # # Uses a raw SQL query to TRUNCATE or DELETE the users table. SQLAlchemy doesn't
@@ -27,10 +26,10 @@
 # # incrementing primary key, CASCADE deletes any dependent entities.  With
 # # sqlite3 in development you need to instead use DELETE to remove all data and
 # # it will reset the primary keys for you as well.
-# def undo_songs():
+# def undo_playlist_songs():
 #     if environment == "production":
 #         db.session.execute(f"TRUNCATE table {SCHEMA}.users RESTART IDENTITY CASCADE;")
 #     else:
-#         db.session.execute(text("DELETE FROM songs"))
+#         db.session.execute(text("DELETE FROM playlist_songs"))
 
 #     db.session.commit()

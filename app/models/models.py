@@ -2,16 +2,14 @@ from .db import db, environment, SCHEMA, add_prefix_for_prod
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 
-# Join Tables
-order_topping = db.Table("order_toppings",
-                       db.Column("orderId", db.Integer, db.ForeignKey(add_prefix_for_prod('order.id')), primary_key=True),
-                       db.Column("toppingId", db.Integer, db.ForeignKey(add_prefix_for_prod('topping.id')), primary_key=True)
-                       )
-if environment == "production":
-    order_topping.schema = SCHEMA
+# Join table
+order_toppings = db.Table(
+    "order_toppings",
+    db.Column("orderId", db.Integer, db.ForeignKey("order.id"), primary_key=True),
+    db.Column("toppingId", db.Integer, db.ForeignKey("topping.id"), primary_key=True)
+)
 
-
-# Users Model.. Need to check if isAdmin boolean works
+# User Model
 class User(db.Model, UserMixin):
     __tablename__ = 'users'
 
@@ -22,16 +20,6 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String(80), unique=True, nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
     hashed_password = db.Column(db.String(255), nullable=False)
-
-
-    # I think I need this but need to look up db more
-    # def __init__(self, username, email, isAdmin=False):
-    #     self.username = username
-    #     self.email = email
-    #     self.isAdmin = isAdmin
-
-    # def __repr__(self):
-    #     return '<User %r>' % self.username
 
     @property
     def password(self):
@@ -55,21 +43,15 @@ class User(db.Model, UserMixin):
         }
 
     # Relationships
-    # User.id has one to many relationships with:
-    # 1. Review.userId
-    user_review = db.relationship("Review", back_populates="reviews")
-    # 2. Order.userId
-    user_order = db.relationship("Order", back_populates="orders")
+    user_reviews = db.relationship("Review", back_populates="user")
+    user_orders = db.relationship("Order", back_populates="user")
 
 
 # Order Model
 class Order(db.Model):
     __tablename__ = 'orders'
 
-    if environment == "production":
-        __table_args__ = {'schema': SCHEMA}
-
-    id = db.Column(db.Integer, primary_key=True, autoincrement=True, db.ForeignKey(add_prefix_for_prod('order.id')))
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     userId = db.Column(db.Integer, nullable=False)
     drinkId = db.Column(db.Integer, nullable=False)
     createdAt = db.Column(db.DateTime, server_default=db.func.now())
@@ -85,26 +67,19 @@ class Order(db.Model):
         }
 
     # Relationships
-    # Order.id has a one to many relationship with OrderTopping.orderId
-    order_orderTopping = db.relationship("OrderTopping",
-                            secondary=order_topping,
-                            back_populates="order_toppings")
-    # Order.userId has a many to one relationship with User.id
-    order_user = db.relationship("User", back_populates="users")
+    order_toppings = db.relationship("Topping", secondary=order_toppings, back_populates="topping_orders")
+    user = db.relationship("User", back_populates="user_orders")
 
 
 # Review Model
 class Review(db.Model):
     __tablename__ = 'reviews'
 
-    if environment == "production":
-        __table_args__ = {'schema': SCHEMA}
-
     id = db.Column(db.Integer, unique=True, primary_key=True, autoincrement=True)
     userId = db.Column(db.Integer, nullable=False)
     orderId = db.Column(db.Integer, unique=True, nullable=False)
     review = db.Column(db.String(255), nullable=False)
-    stars = db.Column(db.Integer(1,5), nullable=False)
+    stars = db.Column(db.Integer, nullable=False)
     createdAt = db.Column(db.DateTime, default=db.func.now())
     updatedAt = db.Column(db.DateTime, default=db.func.now(), onupdate=db.func.now())
 
@@ -120,20 +95,15 @@ class Review(db.Model):
         }
 
     # Relationships
-    # Review.userId has a many to one relationship with User.id
-    review_userId = db.relationship("User", back_populates="users")
-    # Review.orderId has a one to one relationship with Order.id
-    review_orderId = db.relationship("Order", back_populates="orders")
+    user = db.relationship("User", back_populates="user_reviews")
+    order = db.relationship("Order", back_populates="order_review")
 
 
 # Topping Model
 class Topping(db.Model):
     __tablename__ = 'toppings'
 
-    if environment == "production":
-        __table_args__ = {'schema': SCHEMA}
-
-    id = db.Column(db.Integer, primary_key=True, db.ForeignKey(add_prefix_for_prod('topping.id')))
+    id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(255), unique=True, nullable=False)
     details = db.Column(db.String(255), nullable=False)
     imageUrl = db.Column(db.String(255), nullable=False)
@@ -153,18 +123,12 @@ class Topping(db.Model):
         }
 
     # Relationships
-    # Topping.id has a one to many relationship with OrderToppping.toppingId
-    topping_orderTopping = db.relationship("OrderTopping",
-                            secondary=order_topping,
-                            back_populates="order_toppings")
+    topping_orders = db.relationship("Order", secondary=order_toppings, back_populates="order_toppings")
 
 
 # Drink Model
 class Drink(db.Model):
     __tablename__ = 'drinks'
-
-    if environment == "production":
-        __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(255), nullable=False)
@@ -186,5 +150,4 @@ class Drink(db.Model):
         }
 
     # Relationships
-    # Drink.id has a one to many relationship with Order.drinkId
-    drink_id = db.relationship("Order", back_populates="orders")
+    drink_orders = db.relationship("Order", back_populates="order_drink")
