@@ -17,8 +17,8 @@ class User(db.Model, UserMixin):
     isAdmin = db.Column(db.Boolean, default=False, nullable=False)
     firstName = db.Column(db.String(40), nullable=False)
     lastName = db.Column(db.String(40), nullable=False)
-    username = db.Column(db.String(80), unique=True, nullable=False)
-    email = db.Column(db.String(120), unique=True, nullable=False)
+    username = db.Column(db.String(80), nullable=False, unique=True)
+    email = db.Column(db.String(120), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
 
     @property
@@ -75,9 +75,9 @@ class Order(db.Model):
 class Review(db.Model):
     __tablename__ = 'reviews'
 
-    id = db.Column(db.Integer, unique=True, primary_key=True, autoincrement=True)
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True, unique=True)
     userId = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)  # Foreign key to Users Table
-    orderId = db.Column(db.Integer, unique=True, db.ForeignKey('orders.id'), nullable=False)  # Foreign key to Orders Table
+    orderId = db.Column(db.Integer, db.ForeignKey('orders.id'), nullable=False, unique=True)  # Foreign key to Orders Table
     review = db.Column(db.String(255), nullable=False)
     stars = db.Column(db.Integer, nullable=False)
     createdAt = db.Column(db.DateTime, default=db.func.now())
@@ -104,7 +104,7 @@ class Topping(db.Model):
     __tablename__ = 'toppings'
 
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(255), unique=True, nullable=False)
+    name = db.Column(db.String(255), nullable=False, unique=True,)
     details = db.Column(db.String(255), nullable=False)
     imageUrl = db.Column(db.String(255), nullable=False)
     inStock = db.Column(db.Boolean, default=False, nullable=False)
