@@ -49,7 +49,8 @@ def upgrade() -> None:
         sa.Column('stars', sa.Integer(), nullable=False),
         sa.Column('createdAt', sa.DateTime(), server_default=sa.func.current_timestamp(), nullable=False),
         sa.Column('updatedAt', sa.DateTime(), server_default=sa.func.current_timestamp(), nullable=False),
-        sa.PrimaryKeyConstraint('id')
+        sa.PrimaryKeyConstraint('id'),
+        sa.UniqueConstraint('orderId')
     )
 
     op.create_table('toppings',

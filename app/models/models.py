@@ -2,7 +2,7 @@ from .db import db, environment, SCHEMA, add_prefix_for_prod
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 
-# Join table
+# Join Table
 order_toppings = db.Table(
     "order_toppings",
     db.Column("orderId", db.Integer, db.ForeignKey("order.id"), primary_key=True),
@@ -52,7 +52,7 @@ class Order(db.Model):
     __tablename__ = 'orders'
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    userId = db.Column(db.Integer, nullable=False)
+    userId = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)  # Foreign key to Users Table
     drinkId = db.Column(db.Integer, nullable=False)
     createdAt = db.Column(db.DateTime, server_default=db.func.now())
     updatedAt = db.Column(db.DateTime, server_default=db.func.now(), server_onupdate=db.func.now())
@@ -76,8 +76,8 @@ class Review(db.Model):
     __tablename__ = 'reviews'
 
     id = db.Column(db.Integer, unique=True, primary_key=True, autoincrement=True)
-    userId = db.Column(db.Integer, nullable=False)
-    orderId = db.Column(db.Integer, unique=True, nullable=False)
+    userId = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)  # Foreign key to Users Table
+    orderId = db.Column(db.Integer, unique=True, db.ForeignKey('orders.id'), nullable=False)  # Foreign key to Orders Table
     review = db.Column(db.String(255), nullable=False)
     stars = db.Column(db.Integer, nullable=False)
     createdAt = db.Column(db.DateTime, default=db.func.now())
