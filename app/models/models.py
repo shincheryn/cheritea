@@ -15,6 +15,9 @@ if environment == "production":
 class User(db.Model, UserMixin):
     __tablename__ = 'users'
 
+    if environment == "production":
+        __table_args__ = {'schema': SCHEMA}
+
     id = db.Column(db.Integer, primary_key=True)
     isAdmin = db.Column(db.Boolean, default=False, nullable=False)
     firstName = db.Column(db.String(40), nullable=False)
@@ -126,6 +129,9 @@ class Review(db.Model):
 class Topping(db.Model):
     __tablename__ = 'toppings'
 
+    if environment == "production":
+        __table_args__ = {'schema': SCHEMA}
+
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(255), nullable=False, unique=True,)
     details = db.Column(db.String(255), nullable=False)
@@ -158,6 +164,9 @@ class Topping(db.Model):
 # Drink Model
 class Drink(db.Model):
     __tablename__ = 'drinks'
+
+    if environment == "production":
+        __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(255), nullable=False)
