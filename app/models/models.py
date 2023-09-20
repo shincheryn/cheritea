@@ -44,9 +44,9 @@ class User(db.Model, UserMixin):
 
     # Relationships
     # One to many with Review.userId
-    user_reviews = db.relationship("Review", back_populates="users")
+    user_reviews = db.relationship("Review", back_populates="user")
     # One to many with Order.userId
-    user_orders = db.relationship("Order", back_populates="users")
+    user_orders = db.relationship("Order", back_populates="user")
 
 
 # Order Model
@@ -55,7 +55,7 @@ class Order(db.Model):
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     userId = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)  # Foreign key to Users Table
-    drinkId = db.Column(db.Integer, nullable=False)
+    drinkId = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('drinks.id')), nullable=False) # Foreign key to Drinks Table
     createdAt = db.Column(db.DateTime, server_default=db.func.now())
     updatedAt = db.Column(db.DateTime, server_default=db.func.now(), server_onupdate=db.func.now())
 
@@ -80,7 +80,9 @@ class Order(db.Model):
     # Many to one with User.id
     user = db.relationship("User", back_populates="user_orders")
     # One to one with Review.orderId
-    order_review = db.relationship("Review", back_populates="reviews")
+    order_review = db.relationship("Review", back_populates="order")
+    # Many to one with Drink.id
+    order_drinks = db.relationship("Drink", back_populates="drink_orders")
 
 
 # Review Model
@@ -167,6 +169,5 @@ class Drink(db.Model):
             'createdAt': self.createdAt,
             'updatedAt': self.updatedAt,
         }
-
-    # Relationships
-    drink_orders = db.relationship("Order", back_populates="order_drink")
+    # One to many with Order.drinkId
+    drink_orders = db.relationship("Order", back_populates="order_drinks")
