@@ -5,8 +5,8 @@ from flask_login import UserMixin
 # Join Table
 order_toppings = db.Table(
     "order_toppings",
-    db.Column("orderId", db.Integer, db.ForeignKey("order.id"), primary_key=True),
-    db.Column("toppingId", db.Integer, db.ForeignKey("topping.id"), primary_key=True)
+    db.Column("orderId", db.Integer, db.ForeignKey(add_prefix_for_prod("orders.id")), primary_key=True),
+    db.Column("toppingId", db.Integer, db.ForeignKey(add_prefix_for_prod("toppings.id")), primary_key=True)
 )
 
 # User Model
@@ -43,8 +43,10 @@ class User(db.Model, UserMixin):
         }
 
     # Relationships
-    user_reviews = db.relationship("Review", back_populates="user")
-    user_orders = db.relationship("Order", back_populates="user")
+    # One to many with Review.userId
+    user_reviews = db.relationship("Review", back_populates="users")
+    # One to many with Order.userId
+    user_orders = db.relationship("Order", back_populates="users")
 
 
 # Order Model
@@ -52,7 +54,7 @@ class Order(db.Model):
     __tablename__ = 'orders'
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    userId = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)  # Foreign key to Users Table
+    userId = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)  # Foreign key to Users Table
     drinkId = db.Column(db.Integer, nullable=False)
     createdAt = db.Column(db.DateTime, server_default=db.func.now())
     updatedAt = db.Column(db.DateTime, server_default=db.func.now(), server_onupdate=db.func.now())
@@ -67,6 +69,7 @@ class Order(db.Model):
         }
 
     # Relationships
+    # One to many with OrderTopping.orderId
     order_toppings = db.relationship(
         "Topping",
         secondary=order_toppings,
@@ -74,7 +77,10 @@ class Order(db.Model):
         secondaryjoin=(id == order_toppings.c.toppingId),
         back_populates="topping_orders"
     )
+    # Many to one with User.id
     user = db.relationship("User", back_populates="user_orders")
+    # One to one with Review.orderId
+    order_review = db.relationship("Review", back_populates="reviews")
 
 
 # Review Model
@@ -82,8 +88,8 @@ class Review(db.Model):
     __tablename__ = 'reviews'
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True, unique=True)
-    userId = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)  # Foreign key to Users Table
-    orderId = db.Column(db.Integer, db.ForeignKey('orders.id'), nullable=False, unique=True)  # Foreign key to Orders Table
+    userId = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)  # Foreign key to Users Table
+    orderId = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('orders.id')), nullable=False, unique=True)  # Foreign key to Orders Table
     review = db.Column(db.String(255), nullable=False)
     stars = db.Column(db.Integer, nullable=False)
     createdAt = db.Column(db.DateTime, default=db.func.now())
@@ -101,6 +107,7 @@ class Review(db.Model):
         }
 
     # Relationships
+
     user = db.relationship("User", back_populates="user_reviews")
     order = db.relationship("Order", back_populates="order_review")
 
@@ -136,7 +143,7 @@ class Topping(db.Model):
         secondaryjoin=(id == order_toppings.c.orderId),
         back_populates="order_toppings"
     )
-    
+
 
 # Drink Model
 class Drink(db.Model):
