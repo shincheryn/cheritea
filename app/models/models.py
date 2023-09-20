@@ -8,6 +8,8 @@ order_toppings = db.Table(
     db.Column("orderId", db.Integer, db.ForeignKey(add_prefix_for_prod("orders.id")), primary_key=True),
     db.Column("toppingId", db.Integer, db.ForeignKey(add_prefix_for_prod("toppings.id")), primary_key=True)
 )
+if environment == "production":
+        order_toppings.schema = SCHEMA
 
 # User Model
 class User(db.Model, UserMixin):
@@ -53,6 +55,9 @@ class User(db.Model, UserMixin):
 class Order(db.Model):
     __tablename__ = 'orders'
 
+    if environment == "production":
+        __table_args__ = {'schema': SCHEMA}
+
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     userId = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)  # Foreign key to Users Table
     drinkId = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('drinks.id')), nullable=False) # Foreign key to Drinks Table
@@ -88,6 +93,9 @@ class Order(db.Model):
 # Review Model
 class Review(db.Model):
     __tablename__ = 'reviews'
+
+    if environment == "production":
+        __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True, unique=True)
     userId = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)  # Foreign key to Users Table
