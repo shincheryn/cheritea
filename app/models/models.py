@@ -120,7 +120,6 @@ class Review(db.Model):
         }
 
     # Relationships
-
     user = db.relationship("User", back_populates="user_reviews")
     order = db.relationship("Order", back_populates="order_review")
 
