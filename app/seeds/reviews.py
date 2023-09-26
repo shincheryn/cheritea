@@ -1,20 +1,22 @@
 from app.models import db, Review, environment, SCHEMA
 from sqlalchemy.sql import text
+from datetime import datetime
 
 def seed_reviews():
     reviews_data = [
-            {'userId'=1, 'orderId'= 1, 'review'= "Delicious", 'stars'=5 'createdAt'= datetime(2020,10,20), 'updatedAt'= datetime(2020,10,20)},
-            {'userId'=1, 'orderId'= 2, 'review'= "Delicious", 'stars'=4 'createdAt'= datetime(2020,10,20), 'updatedAt'= datetime(2020,10,20)},
-            {'userId'=1, 'orderId'= 3, 'review'= "Delicious", 'stars'=5 'createdAt'= datetime(2020,10,20), 'updatedAt'= datetime(2020,10,20)},
-            {'userId'=2, 'orderId'= 4, 'review'= "Delicious", 'stars'=5 'createdAt'= datetime(2020,10,20), 'updatedAt'= datetime(2020,10,20)},
-            {'userId'=2, 'orderId'= 5, 'review'= "Delicious", 'stars'=4 'createdAt'= datetime(2020,10,20), 'updatedAt'= datetime(2020,10,20)},
-            {'userId'=2, 'orderId'= 6, 'review'= "Delicious", 'stars'=3 'createdAt'= datetime(2020,10,20), 'updatedAt'= datetime(2020,10,20)},
-            {'userId'=3, 'orderId'= 7, 'review'= "Delicious", 'stars'=4 'createdAt'= datetime(2020,10,20), 'updatedAt'= datetime(2020,10,20)},
-            {'userId'=3, 'orderId'= 8, 'review'= "Delicious", 'stars'=5 'createdAt'= datetime(2020,10,20), 'updatedAt'= datetime(2020,10,20)},
-            {'userId'=3, 'orderId'= 9, 'review'= "Delicious", 'stars'=5 'createdAt'= datetime(2020,10,20), 'updatedAt'= datetime(2020,10,20)},
+            {'userId':1, 'orderId': 1, 'review': "Delicious", 'stars':5, 'createdAt': datetime(2020,10,20), 'updatedAt': datetime(2020,10,20)},
+            {'userId':1, 'orderId': 2, 'review': "Delicious", 'stars':4, 'createdAt': datetime(2020,10,20), 'updatedAt': datetime(2020,10,20)},
+            {'userId':1, 'orderId': 3, 'review': "Delicious", 'stars':5, 'createdAt': datetime(2020,10,20), 'updatedAt': datetime(2020,10,20)},
+            {'userId':2, 'orderId': 4, 'review': "Delicious", 'stars':5, 'createdAt': datetime(2020,10,20), 'updatedAt': datetime(2020,10,20)},
+            {'userId':2, 'orderId': 5, 'review': "Delicious", 'stars':4, 'createdAt': datetime(2020,10,20), 'updatedAt': datetime(2020,10,20)},
+            {'userId':2, 'orderId': 6, 'review': "Delicious", 'stars':3, 'createdAt': datetime(2020,10,20), 'updatedAt': datetime(2020,10,20)},
+            {'userId':3, 'orderId': 7, 'review': "Delicious", 'stars':4, 'createdAt': datetime(2020,10,20), 'updatedAt': datetime(2020,10,20)},
+            {'userId':3, 'orderId': 8, 'review': "Delicious", 'stars':5, 'createdAt': datetime(2020,10,20), 'updatedAt': datetime(2020,10,20)},
+            {'userId':3, 'orderId': 9, 'review': "Delicious", 'stars':5, 'createdAt': datetime(2020,10,20), 'updatedAt': datetime(2020,10,20)},
     ]
-    for reviews in toppings_data:
-        db.session.add(**reviews)
+    for review_data in reviews_data:
+        review = Review(**review_data)
+        db.session.add(review)
     db.session.commit()
 
 # Uses a raw SQL query to TRUNCATE or DELETE the users table. SQLAlchemy doesn't
