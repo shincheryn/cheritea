@@ -25,19 +25,19 @@ def seed():
     seed_users()
     # Add other seed functions here
     seed_drinks()
+    seed_toppings()
+    seed_orders()
     seed_reviews()
     seed_order_toppings()
-    seed_orders()
-    seed_toppings()
 
 
 # Creates the `flask seed undo` command
 @seed_commands.command('undo')
 def undo():
-    undo_users()
     # Add other undo functions here
-    undo_drinks()
-    undo_reviews()
     undo_order_toppings()
+    undo_reviews()
     undo_orders()
+    undo_users()
+    undo_drinks()
     undo_toppings()
