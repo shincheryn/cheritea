@@ -47,8 +47,6 @@ def edit_review(orderId):
     if form.validate_on_submit():
         review = Review.query.get(orderId)
         if review:
-            # userId=current_user.id,
-            # orderId=orderId,
             review.review = form.data['review']
             review.stars = form.data['stars']
             db.session.commit()
