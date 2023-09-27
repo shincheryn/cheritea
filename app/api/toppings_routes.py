@@ -75,8 +75,7 @@ def delete_topping(toppingId):
     if not current_user.isAdmin:
         return jsonify({'error': 'Unauthorized'}), 403
 
-    # Query the database to find the topping to be deleted
-    topping = Topping.query.get(topping_id)
+    topping = Topping.query.get(toppingId)
     if topping:
         db.session.delete(topping)
         db.session.commit()

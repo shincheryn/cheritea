@@ -78,12 +78,10 @@ class Order(db.Model):
 
     # Relationships
     # One to many with OrderTopping.orderId
-    order_toppings = db.relationship(
+    toppings = db.relationship(
         "Topping",
         secondary=order_toppings,
-        primaryjoin=(id == order_toppings.c.orderId),
-        secondaryjoin=(id == order_toppings.c.toppingId),
-        back_populates="topping_orders"
+        back_populates="orders"
     )
     # Many to one with User.id
     user = db.relationship("User", back_populates="user_orders", uselist=False)
@@ -151,12 +149,10 @@ class Topping(db.Model):
         }
 
     # Relationships
-    topping_orders = db.relationship(
+    orders = db.relationship(
         "Order",
         secondary=order_toppings,
-        primaryjoin=(id == order_toppings.c.toppingId),
-        secondaryjoin=(id == order_toppings.c.orderId),
-        back_populates="order_toppings"
+        back_populates="toppings"
     )
 
 

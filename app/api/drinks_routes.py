@@ -18,7 +18,8 @@ def get_drinks():
 def get_drink_by_id(drinkId):
     drink = Drink.query.get(drinkId)
     if drink:
-        drink_reviews = [order.order_review.to_dict() for order in drink.drink_orders]
+        # Details includes all reviews for each drink:
+        drink_reviews = [order.order_review.to_dict() for order in drink.drink_orders if order.order_review]
         drink_dict = drink.to_dict()
         drink_dict["reviews"] = drink_reviews
         return jsonify(drink_dict)
@@ -47,7 +48,7 @@ def create_drink():
 
 # EDIT a Drink (Admin)
 @drinks_routes.route('/<int:drinkId>', methods=['PUT'])
-@login_required  # This route requires admin authentication
+@login_required
 def edit_drink(drinkId):
     # Check if the current user is an admin
     if not current_user.isAdmin:

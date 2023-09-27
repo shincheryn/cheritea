@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, request, current_app
-from app.models import Review, User, db
+from app.models import Order, Review, User, db
 from app.forms import ReviewForm
 from flask_login import login_required, current_user
 
@@ -13,15 +13,21 @@ def get_reviews_by_order(orderId):
 
 
 # CREATE a Review
-@reviews_routes.route('/create', methods=['POST'])
+@reviews_routes.route('/<int:orderId>', methods=['POST'])
 @login_required
-def create_review():
-    form = CreateReviewForm()  # Create a form for creating a new review
+def create_review(orderId):
+    order = Order.query.get(orderId)
+    if current_user.id != order.userId:
+        return jsonify({'errors': ["Cannot create a review for an order that doesn't belong to you"]}), 403
+    if order.order_review:
+        return jsonify({'errors': ['A review already exists for this order']}), 403
+
+    form = ReviewForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
-        # Create a new review based on the form data and the current user
         review = Review(
-            userId=userId,
-            orderId=form.data['orderId'],
+            userId=current_user.id,
+            orderId=orderId,
             review=form.data['review'],
             stars=form.data['stars']
         )
@@ -32,14 +38,17 @@ def create_review():
     return jsonify({'errors': ['There was an error creating your review']}), 400
 
 
-# EDIT a Review (Using orderId)
+# EDIT a Review Using Order Id
 @reviews_routes.route('/<int:orderId>', methods=['PUT'])
 @login_required
 def edit_review(orderId):
-    form = EditReviewForm()  # Create a form for editing a review
+    form = ReviewForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         review = Review.query.get(orderId)
         if review:
+            # userId=current_user.id,
+            # orderId=orderId,
             review.review = form.data['review']
             review.stars = form.data['stars']
             db.session.commit()
@@ -52,17 +61,15 @@ def edit_review(orderId):
 # DELETE a Review
 @reviews_routes.route('/<int:orderId>', methods=['DELETE'])
 @login_required
-def delete_review(review_id):
-    # Query the database to find the review to be deleted
-    review = Review.query.get(review_id)
+def delete_review(orderId):
+    review = Review.query.get(orderId)
     if review:
-        # Check if the review belongs to the current user
-        if review.user_id == current_user.id:
-            # Delete the review
+        # Check if review belongs to the current user
+        if review.userId == current_user.id:
             db.session.delete(review)
             db.session.commit()
             return jsonify({'message': 'Review successfully deleted'}), 200
         else:
             return jsonify({'errors': ['Unauthorized user']}), 403
     else:
-        return jsonify({'errors': ['There was an error deleting your review']}), 404
+        return jsonify({'errors': ['Review not found']}), 404
