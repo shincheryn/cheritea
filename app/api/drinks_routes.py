@@ -1,36 +1,43 @@
 from flask import Blueprint, jsonify, request, current_app
-from app.models import Drink, User, db
+from app.models import Drink, User, Review, db
 from flask_login import login_required, current_user
 
 drinks_routes = Blueprint('drinks', __name__)
+
+# GET All Drinks
+@drinks_routes.route('/', methods=['GET'])
+def get_drinks():
+    drinks = Drink.query.all()
+    if drinks:
+        return jsonify([drink.to_dict() for drink in drinks])
+    return jsonify({'error': 'No drinks found'}), 404
+
 
 # GET Details of Drink Based on Id
 @drinks_routes.route('/<int:drinkId>', methods=['GET'])
 def get_drink_by_id(drinkId):
     drink = Drink.query.get(drinkId)
     if drink:
-        return jsonify(drink.to_dict())
+        drink_reviews = [order.order_review.to_dict() for order in drink.drink_orders]
+        drink_dict = drink.to_dict()
+        drink_dict["reviews"] = drink_reviews
+        return jsonify(drink_dict)
     return jsonify({'error': 'Drink not found'}), 404
 
 
 # CREATE a Drink (Admin)
 @drinks_routes.route('/', methods=['POST'])
-@login_required  # This route requires admin authentication
+@login_required
 def create_drink():
     # Check if the current user is an admin
-    if not current_user.is_admin:
+    if not current_user.isAdmin:
         return jsonify({'error': 'Unauthorized'}), 403
 
     data = request.json
     if not data:
         return jsonify({'error': 'Invalid request data'}), 400
 
-    drink = Drink(
-        name=data.get('name'),
-        details=data.get('details'),
-        imageUrl=data.get('imageUrl'),
-        inStock=data.get('inStock')
-    )
+    drink = Drink(**data)
 
     db.session.add(drink)
     db.session.commit()
@@ -43,7 +50,7 @@ def create_drink():
 @login_required  # This route requires admin authentication
 def edit_drink(drinkId):
     # Check if the current user is an admin
-    if not current_user.is_admin:
+    if not current_user.isAdmin:
         return jsonify({'error': 'Unauthorized'}), 403
 
     data = request.json
@@ -66,10 +73,10 @@ def edit_drink(drinkId):
 
 # DELETE a Drink (Admin)
 @drinks_routes.route('/<int:drinkId>', methods=['DELETE'])
-@login_required  # This route requires admin authentication
+@login_required
 def delete_drink(drinkId):
     # Check if the current user is an admin
-    if not current_user.is_admin:
+    if not current_user.isAdmin:
         return jsonify({'error': 'Unauthorized'}), 403
 
     drink = Drink.query.get(drinkId)
@@ -80,16 +87,3 @@ def delete_drink(drinkId):
     db.session.commit()
 
     return jsonify({'message': 'Drink successfully deleted'}), 200
-
-
-# ------
-# GET All Reviews
-@reviews_routes.route('/<int:drinkId>')
-def get_all_reviews():
-    reviews = Review.query.all()
-    return jsonify([review.to_dict() for review in reviews])
-
-# ------
-# POST Drink to Cart (User)
-
-# DELETE Drink from Cart (User)

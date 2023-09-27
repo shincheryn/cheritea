@@ -86,11 +86,11 @@ class Order(db.Model):
         back_populates="topping_orders"
     )
     # Many to one with User.id
-    user = db.relationship("User", back_populates="user_orders")
+    user = db.relationship("User", back_populates="user_orders", uselist=False)
     # One to one with Review.orderId
-    order_review = db.relationship("Review", back_populates="order")
+    order_review = db.relationship("Review", back_populates="order", uselist=False)
     # Many to one with Drink.id
-    order_drinks = db.relationship("Drink", back_populates="drink_orders")
+    order_drink = db.relationship("Drink", back_populates="drink_orders", uselist=False)
 
 
 # Review Model
@@ -120,8 +120,8 @@ class Review(db.Model):
         }
 
     # Relationships
-    user = db.relationship("User", back_populates="user_reviews")
-    order = db.relationship("Order", back_populates="order_review")
+    user = db.relationship("User", back_populates="user_reviews", uselist=False)
+    order = db.relationship("Order", back_populates="order_review", uselist=False)
 
 
 # Topping Model
@@ -186,4 +186,4 @@ class Drink(db.Model):
             'updatedAt': self.updatedAt,
         }
     # One to many with Order.drinkId
-    drink_orders = db.relationship("Order", back_populates="order_drinks")
+    drink_orders = db.relationship("Order", back_populates="order_drink")

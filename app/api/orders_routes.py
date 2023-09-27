@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, request, current_app
 from app.models import Order, User, db
-from app.forms import CreateOrderForm, EditOrderForm  # need to make new flask forms
+from app.forms import OrderForm
 from flask_login import login_required, current_user
 
 orders_routes = Blueprint('orders', __name__)
@@ -15,19 +15,19 @@ def get_order_history(userId):
 
 
 # CREATE an Order (New)
-@orders_routes.route('/create', methods=['POST'])
+@orders_routes.route('/', methods=['POST'])
 @login_required
 def create_order():
-    form = CreateOrderForm()  # Create a form for creating a new order
-    if form.validate_on_submit():
-        # Create a new order based on the form data and the current user
-        order = Order(
-            userId=current_user.id,
-            #etc.
-        )
-        db.session.add(order)
-        db.session.commit()
-        return order.to_dict()
+    data = request.json
+    if not data:
+        return jsonify({'error': 'Invalid request data'}), 400
+
+    order = Order(**data)
+
+    db.session.add(order)
+    db.session.commit()
+
+    return jsonify(drink.to_dict()), 201
     return {'errors': ['Your order was unsuccessful']}, 400
 
 
@@ -35,7 +35,7 @@ def create_order():
 @orders_routes.route('/<int:orderId>', methods=['PUT'])
 @login_required
 def edit_order(orderId):
-    form = EditOrderForm()  # Create a form for editing an order
+    form = OrderForm()
     if form.validate_on_submit():
         # Query the database to find the order to be edited
         order = Order.query.get(orderId)

@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, request, current_app
 from app.models import Review, User, db
-from app.forms import CreateReviewForm, EditReviewForm  # Need to create new flask forms
+from app.forms import ReviewForm
 from flask_login import login_required, current_user
 
 reviews_routes = Blueprint('reviews', __name__)
