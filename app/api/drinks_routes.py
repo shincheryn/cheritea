@@ -8,6 +8,7 @@ drinks_routes = Blueprint('drinks', __name__)
 @drinks_routes.route('/', methods=['GET'])
 def get_drinks():
     drinks = Drink.query.all()
+
     if drinks:
         return jsonify([drink.to_dict() for drink in drinks])
     return jsonify({'error': 'No drinks found'}), 404
@@ -17,6 +18,7 @@ def get_drinks():
 @drinks_routes.route('/<int:drinkId>', methods=['GET'])
 def get_drink_by_id(drinkId):
     drink = Drink.query.get(drinkId)
+
     if drink:
         # Details includes all reviews for each drink:
         drink_reviews = [order.order_review.to_dict() for order in drink.drink_orders if order.order_review]

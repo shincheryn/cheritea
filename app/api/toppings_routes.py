@@ -8,6 +8,7 @@ toppings_routes = Blueprint('toppings', __name__)
 @toppings_routes.route('/', methods=['GET'])
 def get_toppings():
     toppings = Topping.query.all()
+
     if toppings:
         return jsonify([topping.to_dict() for topping in toppings])
     return jsonify({'error': 'No toppings found'}), 404
@@ -17,6 +18,7 @@ def get_toppings():
 @toppings_routes.route('/<int:toppingId>', methods=['GET'])
 def get_topping_by_id(toppingId):
     topping = Topping.query.get(toppingId)
+
     if topping:
         return jsonify(topping.to_dict())
     return jsonify({'error': 'Topping not found'}), 404

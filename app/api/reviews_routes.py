@@ -12,7 +12,7 @@ def get_reviews_by_order(orderId):
     return jsonify([review.to_dict() for review in reviews])
 
 
-# CREATE a Review
+# CREATE a Review Using Order Id
 @reviews_routes.route('/<int:orderId>', methods=['POST'])
 @login_required
 def create_review(orderId):
@@ -56,7 +56,7 @@ def edit_review(orderId):
     return jsonify({'errors': ['There was an error editing your review']}), 400
 
 
-# DELETE a Review
+# DELETE a Review Using Order Id
 @reviews_routes.route('/<int:orderId>', methods=['DELETE'])
 @login_required
 def delete_review(orderId):
