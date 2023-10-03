@@ -1,16 +1,19 @@
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
+import { useHistory } from "react-router-dom";
 import * as drinkActions from "../../store/drink";
 
 function DeleteDrink({ drinkId }) {
   const dispatch = useDispatch();
+  const history = useHistory();
   const { closeModal } = useModal();
 
-  const confirmButtonHandler = async (e) => {
-    e.preventDefault();
+  const confirmButtonHandler = async () => {
     await dispatch(drinkActions.deleteDrinkThunk(drinkId));
     closeModal();
+    history.push("/drinks/"); 
   };
+
 
   return (
     <div>

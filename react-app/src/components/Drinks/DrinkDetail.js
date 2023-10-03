@@ -2,14 +2,14 @@ import React, { useEffect, useState, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
 import * as drinkActions from "../../store/drink";
-// import { useModal } from "../../context/Modal";
 import { Link } from "react-router-dom";
+import OpenModalButton from '../OpenModalButton';
+import DeleteDrink from "./DeleteDrink";
 
 const DrinkDetailsPage = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const history = useHistory();
-  // const { openModal } = useModal();
   const ulRef = useRef();
 
   const [showModal, setShowModal] = useState(false);
@@ -61,6 +61,12 @@ const DrinkDetailsPage = () => {
                 Edit Drink
               </button>
             )}
+            <div className="button-container">
+              <OpenModalButton
+                modalComponent={<DeleteDrink drinkId={currentDrink.id} />}
+                buttonText="Delete"
+              />
+            </div>
           </div>
         )}
       </div>
