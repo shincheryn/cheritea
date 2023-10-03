@@ -5,15 +5,16 @@ import drinksReducer from './drink';
 import toppingsReducer from './topping';
 import ordersReducer from './order';
 import reviewsReducer from './review';
+import cartReducer from './cart'
 
 const rootReducer = combineReducers({
   session,
-  drink: drinksReducer,
-  topping: toppingsReducer,
-  order: ordersReducer,
-  review: reviewsReducer
+  drinks: drinksReducer,
+  toppings: toppingsReducer,
+  orders: ordersReducer,
+  reviews: reviewsReducer,
+  cart: cartReducer,
 });
-
 
 let enhancer;
 

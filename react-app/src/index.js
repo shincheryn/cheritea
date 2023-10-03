@@ -10,6 +10,7 @@ import * as drinkActions from './store/drink';
 import * as toppingActions from './store/topping';
 import * as orderActions from './store/order';
 import * as reviewActions from './store/review';
+// import * as cartActions from './store/cart';
 import App from "./App";
 
 import "./index.css";
@@ -23,6 +24,7 @@ if (process.env.NODE_ENV !== "production") {
 	window.toppingActions = toppingActions;
  	window.orderActions = orderActions;
 	window.reviewActions = reviewActions;
+	// window.cartActions = cartActions;
 }
 
 // Wrap the application with the Modal provider and render the Modal component

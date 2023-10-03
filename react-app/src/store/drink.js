@@ -30,7 +30,6 @@ export const deleteDrink = (drinkId) => ({
   payload: drinkId,
 });
 
-
 //Thunks
 export const loadAllDrinksThunk = () => async (dispatch) => {
   const res = await fetch("/api/drinks/");
@@ -51,9 +50,13 @@ export const loadDrinkByIdThunk = (drinkId) => async (dispatch) => {
 };
 
 export const addDrinkThunk = (newDrink) => async (dispatch) => {
+  console.log(newDrink);
   const res = await fetch("/api/drinks/", {
     method: "POST",
-    body: newDrink,
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(newDrink),
   });
 
   if (res.ok) {
@@ -64,9 +67,15 @@ export const addDrinkThunk = (newDrink) => async (dispatch) => {
 };
 
 export const editDrinkThunk = (drinkId, updatedDrink) => async (dispatch) => {
+  if (updatedDrink.imageUrl === null) {
+    delete updatedDrink["imageUrl"];
+  }
   const res = await fetch(`/api/drinks/${drinkId}`, {
     method: "PUT",
-    body: updatedDrink,
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(updatedDrink),
   });
 
   if (res.ok) {
@@ -86,16 +95,15 @@ export const deleteDrinkThunk = (drinkId) => async (dispatch) => {
   }
 };
 
-
 //Reducer
 const initialState = {};
 
-const drinkReducer = (state = initialState, action) => {
+const drinksReducer = (state = initialState, action) => {
   let newState = { ...state };
   switch (action.type) {
     case LOAD_ALL_DRINKS:
-      action.payload.Drink.forEach((ea) => {
-        newState[ea.id] = ea;
+      action.payload.forEach((drink) => {
+        newState[drink.id] = drink;
       });
       return newState;
     case LOAD_DRINK_BY_ID:
@@ -115,4 +123,4 @@ const drinkReducer = (state = initialState, action) => {
   }
 };
 
-export default drinkReducer;
+export default drinksReducer;

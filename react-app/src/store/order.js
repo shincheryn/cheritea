@@ -30,7 +30,7 @@ export const loadOrdersByUserIdThunk = (userId) => async (dispatch) => {
   if (res.ok) {
     const orders = await res.json();
     dispatch(loadOrdersByUserId(orders));
-    return order;
+    return orders;
   }
 };
 
@@ -73,7 +73,7 @@ export const deleteOrderThunk = (orderId) => async (dispatch) => {
 //Reducer
 const initialState = {};
 
-const orderReducer = (state = initialState, action) => {
+const ordersReducer = (state = initialState, action) => {
   let newState = { ...state };
   switch (action.type) {
     case LOAD_ORDERS_BY_USER_ID:
@@ -95,4 +95,4 @@ const orderReducer = (state = initialState, action) => {
   }
 };
 
-export default orderReducer;
+export default ordersReducer;

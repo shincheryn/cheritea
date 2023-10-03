@@ -89,7 +89,7 @@ export const deleteToppingThunk = (toppingId) => async (dispatch) => {
 //Reducer
 const initialState = {};
 
-const toppingReducer = (state = initialState, action) => {
+const toppingsReducer = (state = initialState, action) => {
   let newState = { ...state };
   switch (action.type) {
     case LOAD_ALL_TOPPINGS:
@@ -114,4 +114,4 @@ const toppingReducer = (state = initialState, action) => {
   }
 };
 
-export default toppingReducer;
+export default toppingsReducer;
