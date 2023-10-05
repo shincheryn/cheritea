@@ -11,9 +11,8 @@ function DeleteDrink({ drinkId }) {
   const confirmButtonHandler = async () => {
     await dispatch(drinkActions.deleteDrinkThunk(drinkId));
     closeModal();
-    history.push("/drinks/"); 
+    history.push("/drinks/");
   };
-
 
   return (
     <div>

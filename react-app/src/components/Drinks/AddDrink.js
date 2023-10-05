@@ -6,7 +6,7 @@ import * as drinkActions from "../../store/drink";
 const AddDrinkPage = () => {
   const dispatch = useDispatch();
   const history = useHistory();
-  const defaultDrinkImage = 'https://res.cloudinary.com/dvlsr70pm/image/upload/v1696373139/4207310_a3m63u.png';
+  const defaultDrinkImage = "https://res.cloudinary.com/dvlsr70pm/image/upload/v1696373139/4207310_a3m63u.png";
   const [drinkName, setDrinkName] = useState("");
   const [drinkDetails, setDrinkDetails] = useState("");
   const [drinkImageUrl, setDrinkImageUrl] = useState("");

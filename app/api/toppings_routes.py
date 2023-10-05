@@ -1,6 +1,7 @@
 from flask import Blueprint, jsonify, request, current_app
 from app.models import Topping, User, db
 from flask_login import login_required, current_user
+from app.forms import ToppingForm
 from app.api.auth_routes import validation_errors_to_error_messages
 from app.api.helper import upload_file_to_s3, get_unique_filename
 from sqlalchemy import and_
@@ -55,22 +56,33 @@ def edit_topping(toppingId):
     if not current_user.isAdmin:
         return jsonify({'error': 'Unauthorized'}), 403
 
-    data = request.json
-    if not data:
-        return jsonify({'error': 'Invalid request data'}), 400
+ # Flask Form
+    form = ToppingForm()
+    print(form)
+    print(request.data)
+    print(form.data)
+    form['csrf_token'].data = request.cookies['csrf_token']
 
-    topping = Topping.query.get(toppingId)
-    if not topping:
-        return jsonify({'error': 'Topping not found'}), 404
+    if form.validate_on_submit():
+        topping = Topping.query.get(toppingId)
+        if not topping:
+            return jsonify({'error': 'Topping not found'}), 404
 
-    topping.name = data.get('name', topping.name)
-    topping.details = data.get('details', topping.details)
-    topping.imageUrl = data.get('imageUrl', topping.imageUrl)
-    topping.inStock = data.get('inStock', topping.inStock)
+        data = form.data
+        topping.name = data.get('name', topping.name)
+        topping.details = data.get('details', topping.details)
+        topping.inStock = data.get('inStock', topping.inStock)
+        if 'image' in data:
+            upload = upload_file_to_s3(data['image'])
+            if "url" not in upload:
+                return {'errors': 'Failed to upload'}
+            remove_file_from_s3(topping.imageUrl)
+            topping.imageUrl = upload['url']
 
-    db.session.commit()
+        db.session.commit()
+        return jsonify(topping.to_dict()), 200
 
-    return jsonify(topping.to_dict()), 200
+    return jsonify({'error': 'Invalid request data'}), 400
 
 
 # DELETE a Topping (Admin)

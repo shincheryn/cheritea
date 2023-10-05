@@ -2,8 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
 import * as drinkActions from "../../store/drink";
-import { Link } from "react-router-dom";
-import OpenModalButton from '../OpenModalButton';
+import OpenModalButton from "../OpenModalButton";
 import DeleteDrink from "./DeleteDrink";
 
 const DrinkDetailsPage = () => {

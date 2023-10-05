@@ -72,7 +72,6 @@ def edit_drink(drinkId):
         if not drink:
             return jsonify({'error': 'Drink not found'}), 404
 
-
         data = form.data
         drink.name = data.get('name', drink.name)
         drink.details = data.get('details', drink.details)

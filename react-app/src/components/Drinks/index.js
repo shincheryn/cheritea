@@ -59,8 +59,7 @@ const AllDrinks = () => {
                 </div>
                 <div className="drink-name">{drink.name}</div>
               </Link>
-              <div className="button-container">
-              </div>
+              <div className="button-container"></div>
             </div>
           ))}
         </div>
