@@ -1,6 +1,10 @@
 from flask import Blueprint, jsonify, request, current_app
 from app.models import Drink, User, Review, db
 from flask_login import login_required, current_user
+from app.forms import DrinkForm
+from app.api.auth_routes import validation_errors_to_error_messages
+from app.api.helper import upload_file_to_s3, remove_file_from_s3
+from sqlalchemy import and_
 
 drinks_routes = Blueprint('drinks', __name__)
 
@@ -56,22 +60,34 @@ def edit_drink(drinkId):
     if not current_user.isAdmin:
         return jsonify({'error': 'Unauthorized'}), 403
 
-    data = request.json
-    if not data:
-        return jsonify({'error': 'Invalid request data'}), 400
+    # Flask Form
+    form = DrinkForm()
+    print(form)
+    print(request.data)
+    print(form.data)
+    form['csrf_token'].data = request.cookies['csrf_token']
 
-    drink = Drink.query.get(drinkId)
-    if not drink:
-        return jsonify({'error': 'Drink not found'}), 404
+    if form.validate_on_submit():
+        drink = Drink.query.get(drinkId)
+        if not drink:
+            return jsonify({'error': 'Drink not found'}), 404
 
-    drink.name = data.get('name', drink.name)
-    drink.details = data.get('details', drink.details)
-    drink.imageUrl = data.get('imageUrl', drink.imageUrl)
-    drink.inStock = data.get('inStock', drink.inStock)
 
-    db.session.commit()
+        data = form.data
+        drink.name = data.get('name', drink.name)
+        drink.details = data.get('details', drink.details)
+        drink.inStock = data.get('inStock', drink.inStock)
+        if 'image' in data:
+            upload = upload_file_to_s3(data['image'])
+            if "url" not in upload:
+                return {'errors': 'Failed to upload'}
+            remove_file_from_s3(drink.imageUrl)
+            drink.imageUrl = upload['url']
 
-    return jsonify(drink.to_dict()), 200
+        db.session.commit()
+        return jsonify(drink.to_dict()), 200
+
+    return jsonify({'error': 'Invalid request data'}), 400
 
 
 # DELETE a Drink (Admin)

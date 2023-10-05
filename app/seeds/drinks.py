@@ -4,18 +4,18 @@ import datetime
 
 def seed_drinks():
     drinks_data = [
-            {'name': "House Black Milk Tea", 'details': "Our classic house blend", 'imageUrl': "imageUrl1", 'inStock': True, 'createdAt': datetime.date(2020,10,20), 'updatedAt': datetime.date(2020,10,20)},
-            {'name': "Matcha Milk Tea", 'details': "Earthy and subtle flavors", 'imageUrl': "imageUrl2", 'inStock': True, 'createdAt': datetime.date(2020,10,20), 'updatedAt': datetime.date(2020,10,20)},
-            {'name': "Jasmine Milk Tea", 'details': "Special floral blend", 'imageUrl': "imageUrl3", 'inStock': True, 'createdAt': datetime.date(2020,10,20), 'updatedAt': datetime.date(2020,10,20)},
-            {'name': "Black Sesame Milk Tea", 'details': "Savory and sweet", 'imageUrl': "imageUrl4", 'inStock': True, 'createdAt': datetime.date(2020,10,20), 'updatedAt': datetime.date(2020,10,20)},
-            {'name': "Ginger Lemon Tea", 'details': "Perfect hot for winters", 'imageUrl': "imageUrl5", 'inStock': True, 'createdAt': datetime.date(2020,10,20), 'updatedAt': datetime.date(2020,10,20)},
-            {'name': "Passionfruit Tea", 'details': "Summery drink", 'imageUrl': "imageUrl6", 'inStock': True, 'createdAt': datetime.date(2020,10,20), 'updatedAt': datetime.date(2020,10,20)},
-            {'name': "Strawberry Matcha Milk Tea", 'details': "Everyone's favorite", 'imageUrl': "imageUrl7", 'inStock': True, 'createdAt': datetime.date(2020,10,20), 'updatedAt': datetime.date(2020,10,20)},
-            {'name': "Taro Milk Tea", 'details': "With real taro chunks", 'imageUrl': "imageUrl8", 'inStock': True, 'createdAt': datetime.date(2020,10,20), 'updatedAt': datetime.date(2020,10,20)},
-            {'name': "Brown Sugar Black Milk Tea", 'details': "Our classic house blend with house made brown sugar syrup", 'imageUrl': "imageUrl9", 'inStock': True, 'createdAt': datetime.date(2020,10,20), 'updatedAt':  datetime.date(2020,10,20)},
-            {'name': "Thai Iced Tea", 'details': "Deliciously steeped", 'imageUrl': "imageUrl10", 'inStock': True, 'createdAt': datetime.date(2020,10,20), 'updatedAt': datetime.date(2020,10,20)},
-            {'name': "Mango Green Tea", 'details': "Fresh mango chunks", 'imageUrl': "imageUrl11", 'inStock': True, 'createdAt': datetime.date(2020,10,20), 'updatedAt': datetime.date(2020,10,20)},
-            {'name': "Peach Green Tea", 'details': "Fresh peach chunks", 'imageUrl': "imageUrl12", 'inStock': True, 'createdAt': datetime.date(2020,10,20), 'updatedAt': datetime.date(2020,10,20)}
+            {'name': "House Black Milk Tea", 'details': "Our classic house blend", 'imageUrl': "https://res.cloudinary.com/dvlsr70pm/image/upload/v1696373139/4207310_a3m63u.png", 'inStock': True, 'createdAt': datetime.date(2020,10,20), 'updatedAt': datetime.date(2020,10,20)},
+            {'name': "Matcha Milk Tea", 'details': "Earthy and subtle flavors", 'imageUrl': "https://res.cloudinary.com/dvlsr70pm/image/upload/v1696373139/4207310_a3m63u.png", 'inStock': True, 'createdAt': datetime.date(2020,10,20), 'updatedAt': datetime.date(2020,10,20)},
+            {'name': "Jasmine Milk Tea", 'details': "Special floral blend", 'imageUrl': "https://res.cloudinary.com/dvlsr70pm/image/upload/v1696373139/4207310_a3m63u.png", 'inStock': True, 'createdAt': datetime.date(2020,10,20), 'updatedAt': datetime.date(2020,10,20)},
+            {'name': "Black Sesame Milk Tea", 'details': "Savory and sweet", 'imageUrl': "https://res.cloudinary.com/dvlsr70pm/image/upload/v1696373139/4207310_a3m63u.png", 'inStock': True, 'createdAt': datetime.date(2020,10,20), 'updatedAt': datetime.date(2020,10,20)},
+            {'name': "Ginger Lemon Tea", 'details': "Perfect hot for winters", 'imageUrl': "https://res.cloudinary.com/dvlsr70pm/image/upload/v1696373139/4207310_a3m63u.png", 'inStock': True, 'createdAt': datetime.date(2020,10,20), 'updatedAt': datetime.date(2020,10,20)},
+            {'name': "Passionfruit Tea", 'details': "Summery drink", 'imageUrl': "https://res.cloudinary.com/dvlsr70pm/image/upload/v1696373139/4207310_a3m63u.png", 'inStock': True, 'createdAt': datetime.date(2020,10,20), 'updatedAt': datetime.date(2020,10,20)},
+            {'name': "Strawberry Matcha Milk Tea", 'details': "Everyone's favorite", 'imageUrl': "https://res.cloudinary.com/dvlsr70pm/image/upload/v1696373139/4207310_a3m63u.png", 'inStock': True, 'createdAt': datetime.date(2020,10,20), 'updatedAt': datetime.date(2020,10,20)},
+            {'name': "Taro Milk Tea", 'details': "With real taro chunks", 'imageUrl': "https://res.cloudinary.com/dvlsr70pm/image/upload/v1696373139/4207310_a3m63u.png", 'inStock': True, 'createdAt': datetime.date(2020,10,20), 'updatedAt': datetime.date(2020,10,20)},
+            {'name': "Brown Sugar Black Milk Tea", 'details': "Our classic house blend with house made brown sugar syrup", 'imageUrl': "https://res.cloudinary.com/dvlsr70pm/image/upload/v1696373139/4207310_a3m63u.png", 'inStock': True, 'createdAt': datetime.date(2020,10,20), 'updatedAt':  datetime.date(2020,10,20)},
+            {'name': "Thai Iced Tea", 'details': "Deliciously steeped", 'imageUrl': "https://res.cloudinary.com/dvlsr70pm/image/upload/v1696373139/4207310_a3m63u.png", 'inStock': True, 'createdAt': datetime.date(2020,10,20), 'updatedAt': datetime.date(2020,10,20)},
+            {'name': "Mango Green Tea", 'details': "Fresh mango chunks", 'imageUrl': "https://res.cloudinary.com/dvlsr70pm/image/upload/v1696373139/4207310_a3m63u.png", 'inStock': True, 'createdAt': datetime.date(2020,10,20), 'updatedAt': datetime.date(2020,10,20)},
+            {'name': "Peach Green Tea", 'details': "Fresh peach chunks", 'imageUrl': "https://res.cloudinary.com/dvlsr70pm/image/upload/v1696373139/4207310_a3m63u.png", 'inStock': True, 'createdAt': datetime.date(2020,10,20), 'updatedAt': datetime.date(2020,10,20)}
     ]
     for drink_data in drinks_data:
         drink = Drink(**drink_data)

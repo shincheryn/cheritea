@@ -41,7 +41,6 @@ function App() {
           <Route path="/drinks/:id">
             <DrinkDetailsPage />
           </Route>
-
           <Route path="/drinks">
             <AllDrinks />
           </Route>

@@ -32,7 +32,7 @@ const EditDrink = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Create a FormData object
+    // FormData Object
     const formData = new FormData();
     formData.append("name", drinkName);
     formData.append("details", drinkDetails);
@@ -41,12 +41,14 @@ const EditDrink = () => {
     }
 
     if (!drinkName) setErrors({ drinkName: "Drink name is required" });
-    else if (!drinkDetails) setErrors({ drinkDetails: "Drink detail is required" });
+    else if (!drinkDetails)
+      setErrors({ drinkDetails: "Drink detail is required" });
     else {
       setErrors({});
       dispatch(drinkActions.editDrinkThunk(id, formData))
         .then((drink) => {
-          history.push(`/drinks/${drink.id}/`);
+          console.log(drink);
+          history.push(`/drinks/${id}/`);
         })
         .catch((err) => {
           console.error("Error editing drink:", err);
@@ -59,7 +61,11 @@ const EditDrink = () => {
       <div className="page-container">
         <div className="form-create">
           <h1>Update Drink</h1>
-          <form method="PUT" onSubmit={handleSubmit} encType="multipart/form-data">
+          <form
+            method="PUT"
+            onSubmit={handleSubmit}
+            encType="multipart/form-data"
+          >
             <div>
               <div className="error-message">
                 {errors.drinkName && <p className="">{errors.drinkName}</p>}

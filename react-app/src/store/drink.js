@@ -67,15 +67,12 @@ export const addDrinkThunk = (newDrink) => async (dispatch) => {
 };
 
 export const editDrinkThunk = (drinkId, updatedDrink) => async (dispatch) => {
-  if (updatedDrink.imageUrl === null) {
-    delete updatedDrink["imageUrl"];
+  if (updatedDrink.image === null) {
+    delete updatedDrink["image"];
   }
   const res = await fetch(`/api/drinks/${drinkId}`, {
     method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(updatedDrink),
+    body: updatedDrink,
   });
 
   if (res.ok) {

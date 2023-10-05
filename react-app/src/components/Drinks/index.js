@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 import * as drinksActions from "../../store/drink";
-import OpenModalButton from "../OpenModalButton";
 import "./Drinks.css";
 
 const AllDrinks = () => {
@@ -61,10 +60,6 @@ const AllDrinks = () => {
                 <div className="drink-name">{drink.name}</div>
               </Link>
               <div className="button-container">
-                {/* <OpenModalButton
-                      modalComponent={<DeleteDrinkModal id={drink.id} />}
-                      buttonText="Delete"
-                    /> */}
               </div>
             </div>
           ))}
