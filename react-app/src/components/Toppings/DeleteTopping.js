@@ -1,15 +1,18 @@
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
+import { useHistory } from "react-router-dom";
 import * as toppingActions from "../../store/topping";
 
 function DeleteTopping({ toppingId }) {
   const dispatch = useDispatch();
+  const history = useHistory();
   const { closeModal } = useModal();
 
   const confirmButtonHandler = async (e) => {
     e.preventDefault();
     await dispatch(toppingActions.deleteToppingThunk(toppingId));
     closeModal();
+    history.push("/toppings/")
   };
 
   return (

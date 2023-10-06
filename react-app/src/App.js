@@ -5,10 +5,16 @@ import SignupFormPage from "./components/SignupFormPage";
 import LoginFormPage from "./components/LoginFormPage";
 import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation";
-import AllDrinks from "./components/Drinks";
+
+import AllDrinksPage from "./components/Drinks/";
 import DrinkDetailsPage from "./components/Drinks/DrinkDetail";
 import AddDrinkPage from "./components/Drinks/AddDrink";
 import EditDrinkPage from "./components/Drinks/EditDrink";
+
+import AllToppingsPage from "./components/Toppings";
+import AddToppingPage from "./components/Toppings/AddTopping";
+import EditToppingPage from "./components/Toppings/EditTopping";
+import ToppingDetailsPage from "./components/Toppings/ToppingDetail";
 
 // import Cart from './components/Cart';
 
@@ -42,7 +48,19 @@ function App() {
             <DrinkDetailsPage />
           </Route>
           <Route path="/drinks">
-            <AllDrinks />
+            <AllDrinksPage />
+          </Route>
+          <Route path="/toppings/new">
+            <AddToppingPage />
+          </Route>
+          <Route path="/toppings/:id/edit">
+            <EditToppingPage />
+          </Route>
+          <Route path="/toppings/:id">
+            <ToppingDetailsPage />
+          </Route>
+          <Route path="/toppings">
+            <AllToppingsPage />
           </Route>
         </Switch>
       )}

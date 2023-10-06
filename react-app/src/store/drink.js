@@ -67,6 +67,7 @@ export const addDrinkThunk = (newDrink) => async (dispatch) => {
 };
 
 export const editDrinkThunk = (drinkId, updatedDrink) => async (dispatch) => {
+
   if (updatedDrink.image === null) {
     delete updatedDrink["image"];
   }

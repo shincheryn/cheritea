@@ -3,7 +3,7 @@ from app.models import Topping, User, db
 from flask_login import login_required, current_user
 from app.forms import ToppingForm
 from app.api.auth_routes import validation_errors_to_error_messages
-from app.api.helper import upload_file_to_s3, get_unique_filename
+from app.api.helper import upload_file_to_s3, remove_file_from_s3
 from sqlalchemy import and_
 
 toppings_routes = Blueprint('toppings', __name__)
@@ -72,7 +72,7 @@ def edit_topping(toppingId):
         topping.name = data.get('name', topping.name)
         topping.details = data.get('details', topping.details)
         topping.inStock = data.get('inStock', topping.inStock)
-        if 'image' in data:
+        if data['image']:
             upload = upload_file_to_s3(data['image'])
             if "url" not in upload:
                 return {'errors': 'Failed to upload'}

@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import * as drinkActions from "../../store/drink";
 
-const EditDrink = () => {
+const EditDrinkPage = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const { id } = useParams();
@@ -120,4 +120,4 @@ const EditDrink = () => {
   );
 };
 
-export default EditDrink;
+export default EditDrinkPage;

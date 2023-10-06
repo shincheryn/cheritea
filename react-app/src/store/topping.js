@@ -50,9 +50,13 @@ export const loadToppingByIdThunk = (toppingId) => async (dispatch) => {
 };
 
 export const addToppingThunk = (newTopping) => async (dispatch) => {
+  console.log(newTopping);
   const res = await fetch("/api/toppings/", {
     method: "POST",
-    body: newTopping,
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(newTopping),
   });
 
   if (res.ok) {
@@ -62,19 +66,21 @@ export const addToppingThunk = (newTopping) => async (dispatch) => {
   }
 };
 
-export const editToppingThunk =
-  (toppingId, updatedTopping) => async (dispatch) => {
-    const res = await fetch(`/api/toppings/${toppingId}`, {
-      method: "PUT",
-      body: updatedTopping,
-    });
+export const editToppingThunk = (toppingId, updatedTopping) => async (dispatch) => {
+  if (updatedTopping.image === null) {
+    delete updatedTopping["image"];
+  }
+  const res = await fetch(`/api/toppings/${toppingId}`, {
+    method: "PUT",
+    body: updatedTopping,
+  });
 
-    if (res.ok) {
-      const updated = await res.json();
-      dispatch(editTopping(updated));
-      return updated;
-    }
-  };
+  if (res.ok) {
+    const updated = await res.json();
+    dispatch(editTopping(updated));
+    return updated;
+  }
+};
 
 export const deleteToppingThunk = (toppingId) => async (dispatch) => {
   const res = await fetch(`/api/toppings/${toppingId}`, {
@@ -93,8 +99,8 @@ const toppingsReducer = (state = initialState, action) => {
   let newState = { ...state };
   switch (action.type) {
     case LOAD_ALL_TOPPINGS:
-      action.payload.forEach((ea) => {
-        newState[ea.id] = ea;
+      action.payload.forEach((topping) => {
+        newState[topping.id] = topping;
       });
       return newState;
     case LOAD_TOPPING_BY_ID:

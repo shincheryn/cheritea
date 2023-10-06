@@ -4,7 +4,7 @@ import { Link, useHistory } from "react-router-dom";
 import * as drinksActions from "../../store/drink";
 import "./Drinks.css";
 
-const AllDrinks = () => {
+const AllDrinksPage = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const drinks = useSelector((state) => Object.values(state.drinks));
@@ -68,4 +68,4 @@ const AllDrinks = () => {
   );
 };
 
-export default AllDrinks;
+export default AllDrinksPage;

@@ -76,7 +76,7 @@ def edit_drink(drinkId):
         drink.name = data.get('name', drink.name)
         drink.details = data.get('details', drink.details)
         drink.inStock = data.get('inStock', drink.inStock)
-        if 'image' in data:
+        if data['image']:
             upload = upload_file_to_s3(data['image'])
             if "url" not in upload:
                 return {'errors': 'Failed to upload'}

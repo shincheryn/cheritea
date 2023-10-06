@@ -130,7 +130,7 @@ class Topping(db.Model):
         __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(255), nullable=False, unique=True,)
+    name = db.Column(db.String(255), nullable=False)
     details = db.Column(db.String(255), nullable=False)
     imageUrl = db.Column(db.String(255), nullable=False)
     inStock = db.Column(db.Boolean, default=False, nullable=False)

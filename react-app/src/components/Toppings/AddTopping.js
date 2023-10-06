@@ -6,7 +6,7 @@ import * as toppingActions from "../../store/topping";
 const AddToppingPage = () => {
   const dispatch = useDispatch();
   const history = useHistory();
-  const defaultToppingImage = "";
+  const defaultToppingImage = "https://cdn4.iconfinder.com/data/icons/drinks-beverage-5/1000/Bubble_matcha-512.png";
   const [toppingName, setToppingName] = useState("");
   const [toppingDetails, setToppingDetails] = useState("");
   const [toppingImageUrl, setToppingImageUrl] = useState("");
@@ -31,7 +31,11 @@ const AddToppingPage = () => {
       toppingImageUrl.trim() === "" ? defaultToppingImage : toppingImageUrl;
 
     await dispatch(
-      toppingActions.addToppingThunk(toppingName, toppingDetails, imageUrlToUse)
+      toppingActions.addToppingThunk({
+        name: toppingName,
+        details: toppingDetails,
+        imageUrl: imageUrlToUse
+      })
     );
     history.push("/toppings/");
   };
