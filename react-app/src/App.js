@@ -16,6 +16,10 @@ import AddToppingPage from "./components/Toppings/AddTopping";
 import EditToppingPage from "./components/Toppings/EditTopping";
 import ToppingDetailsPage from "./components/Toppings/ToppingDetail";
 
+import ReviewDetailsPage from "./components/Reviews/ReviewDetail";
+import CreateReviewPage from "./components/Reviews/CreateReview";
+import EditReviewPage from "./components/Reviews/EditReview";
+
 // import Cart from './components/Cart';
 
 function App() {
@@ -61,6 +65,15 @@ function App() {
           </Route>
           <Route path="/toppings">
             <AllToppingsPage />
+          </Route>
+          <Route path="/reviews/create/:orderId">
+            <CreateReviewPage />
+          </Route>
+          <Route path="/reviews/edit/:orderId/:reviewId">
+            <EditReviewPage />
+          </Route>
+          <Route path="/reviews/:orderId/:reviewId">
+            <ReviewDetailsPage />
           </Route>
         </Switch>
       )}
