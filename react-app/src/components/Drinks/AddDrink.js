@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import * as drinkActions from "../../store/drink";
+import "../CSS/CreateForm.css";
 
 const AddDrinkPage = () => {
   const dispatch = useDispatch();
@@ -41,48 +42,44 @@ const AddDrinkPage = () => {
   };
 
   return (
-    <div className="create-drink-container">
+    <div className="form-container">
       <div className="centered-content">
-        <h1 className="create-drink-title">Create a Drink</h1>
-        <form
-          className="create-drink-form"
-          onSubmit={handleSubmit}
-          encType="multipart/form-data"
-        >
+        <h1 className="form-title">Create a Drink</h1>
+        <form className="form" onSubmit={handleSubmit} encType="multipart/form-data">
           <div>
-            <label className="create-drink-label">
+            <label className="form-label">
               Drink Name
               <input
-                className="create-drink-input"
+                className="form-input"
                 type="text"
                 placeholder="Drink Name"
                 value={drinkName}
                 onChange={(e) => setDrinkName(e.target.value)}
               />
             </label>
-            <label className="create-drink-label">
+            <label className="form-label">
               Drink Details
               <input
-                className="create-drink-input"
+                className="form-input"
                 type="text"
                 placeholder="Drink Details"
                 value={drinkDetails}
                 onChange={(e) => setDrinkDetails(e.target.value)}
               />
             </label>
-            <label className="create-drink-label">
+            <label className="form-label">
               Drink Image Url
               <input
-                className="create-drink-input"
+                className="form-input"
                 type="text"
                 placeholder="Drink Image URL"
                 value={drinkImageUrl}
                 onChange={(e) => setDrinkImageUrl(e.target.value)}
               />
             </label>
-            {error && <p className="create-drink-error-message">{error}</p>}
+            {error && <p className="form-error-message">{error}</p>}
           </div>
-          <button className="create-drink-submit-button" type="submit">
+          <button className="form-submit-button" type="submit">
             Submit
           </button>
         </form>

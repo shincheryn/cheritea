@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import * as toppingActions from "../../store/topping";
+import "../CSS/EditForm.css";
 
 const EditToppingPage = () => {
   const dispatch = useDispatch();

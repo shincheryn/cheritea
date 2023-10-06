@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 import * as drinksActions from "../../store/drink";
-import "./Drinks.css";
+import "../CSS/AllItems.css";
 
 const AllDrinksPage = () => {
   const dispatch = useDispatch();
@@ -18,11 +18,11 @@ const AllDrinksPage = () => {
     <div>
       <div className="page-container">
         <h1 className="title">Drinks</h1>
-        {user.isAdmin &&
+        {user?.isAdmin &&
           (drinks.length === 0 ? (
-            <div className="create-first-drink">
+            <div className="create-button-container">
               <button
-                className="upload-button"
+                className="generic-button"
                 onClick={(e) => {
                   e.stopPropagation();
                   history.push(`/drinks`);
@@ -32,9 +32,9 @@ const AllDrinksPage = () => {
               </button>
             </div>
           ) : (
-            <div className="drink-button">
+            <div className="create-button-container">
               <button
-                className="upload-button"
+                className="generic-button"
                 onClick={(e) => {
                   e.stopPropagation();
                   history.push(`/drinks/new`);
@@ -47,8 +47,8 @@ const AllDrinksPage = () => {
         <div className="tile-container">
           {/* if user isAdmin */}
           {drinks.map((drink) => (
-            <div key={drink.id} className="tile">
-              <Link to={`/drinks/${drink.id}`} className="drink-link">
+            <div key={drink.id} className="generic-tile">
+              <Link to={`/drinks/${drink.id}`} className="link">
                 <div>
                   <img
                     className="image"
@@ -57,7 +57,7 @@ const AllDrinksPage = () => {
                     title={drink.name}
                   />
                 </div>
-                <div className="drink-name">{drink.name}</div>
+                <div className="name">{drink.name}</div>
               </Link>
               <div className="button-container"></div>
             </div>

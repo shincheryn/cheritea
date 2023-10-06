@@ -42,6 +42,7 @@ const ToppingDetailsPage = () => {
         {!isLoading && !currentTopping && <div>Topping not found.</div>}
         {!isLoading && currentTopping && (
           <div>
+            <h1 className="topping-name">{currentTopping?.name}</h1>
             <img
               className="topping-image"
               key={currentTopping?.id}
@@ -50,7 +51,7 @@ const ToppingDetailsPage = () => {
               title={currentTopping?.name}
             />
             <p className="details">{currentTopping?.details}</p>
-            {user.isAdmin && (
+            {user?.isAdmin && (
               <button
                 onClick={(e) => {
                   e.stopPropagation();
@@ -60,12 +61,14 @@ const ToppingDetailsPage = () => {
                 Edit Topping
               </button>
             )}
-            <div className="button-container">
-              <OpenModalButton
-                modalComponent={<DeleteTopping toppingId={currentTopping.id} />}
-                buttonText="Delete"
-              />
-            </div>
+            {user?.isAdmin && (
+              <div className="button-container">
+                <OpenModalButton
+                  modalComponent={<DeleteTopping toppingId={currentTopping.id} />}
+                  buttonText="Delete"
+                />
+              </div>
+            )}
           </div>
         )}
       </div>

@@ -1,1 +1,63 @@
-/* TODO Add site wide styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  /* Define global styles for the entire application */
+  body {
+    font-family: Monaco;
+    background-color: #fff; /* Background color for the entire app */
+    gap: 10px
+  }
+
+  /* Style the root element */
+  #root {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+  }
+
+  /* Style the application's main container */
+  #app-container {
+    width: 100%;
+    max-width: 1200px;
+    padding: 20px;
+  }
+
+  /* Add styles for links */
+  a {
+    text-decoration: none;
+    color: #333; /* Link color */
+  }
+
+  a:hover {
+    color: #e7c6ff; /* Link color on hover */
+  }
+
+
+  /* Referencing CodePen */
+
+  body {
+    background: linear-gradient(-45deg, #FFD6FF, #E7C6FF, #C8B6FF, #B8C0FF, #BBD0FF);
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite;
+    height: 100vh;
+  }
+
+  @keyframes gradient {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+  /* COLORSCHEMES */
+  /* https://coolors.co/palettes/popular/purple */

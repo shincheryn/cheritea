@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import * as drinkActions from "../../store/drink";
+import "../CSS/EditForm.css";
 
 const EditDrinkPage = () => {
   const dispatch = useDispatch();

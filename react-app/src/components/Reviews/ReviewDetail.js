@@ -44,7 +44,7 @@ const ReviewDetailsPage = () => {
           <div>
             <p className="review-text">{currentReview?.review}</p>
             <p className="stars">Stars: {currentReview?.stars}</p>
-            {user.isAdmin && (
+            {user?.isAdmin && (
               <button
                 onClick={(e) => {
                   e.stopPropagation();

@@ -1,0 +1,61 @@
+/* DeleteForm.css */
+
+/* Delete Form Container */
+.delete-form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 200px;
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    text-align: center;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+
+  /* Delete Form Title */
+  .delete-form-title {
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: #333; 
+  }
+
+  /* Delete Form Message */
+  .delete-form-message {
+    font-size: 16px;
+    margin-bottom: 20px;
+    color: #666;
+  }
+
+  /* Delete Button Styles */
+  .delete-button {
+    background-color: #e7c6ff;
+    color: #333;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-right: 10px;
+  }
+
+  .delete-button:hover {
+    background-color: #c8b6ff;
+  }
+
+  /* Cancel Button Styles */
+  .cancel-button {
+    background-color: #b8c0ff;
+    color: #333;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+
+  .cancel-button:hover {
+    background-color: #bbd0ff;
+  }

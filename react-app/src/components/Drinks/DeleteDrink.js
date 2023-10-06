@@ -2,6 +2,7 @@ import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import { useHistory } from "react-router-dom";
 import * as drinkActions from "../../store/drink";
+import "../CSS/DeleteForm.css";
 
 function DeleteDrink({ drinkId }) {
   const dispatch = useDispatch();
@@ -15,13 +16,15 @@ function DeleteDrink({ drinkId }) {
   };
 
   return (
-    <div>
-      <h1>Confirm Delete</h1>
-      <h5>Are you sure you want to delete this drink?</h5>
-      <button className="deleteDrinkButton" onClick={confirmButtonHandler}>
+    <div className="delete-form-container">
+      <h1 className="delete-form-title">Confirm Delete</h1>
+      <h5 className="delete-form-message">
+        Are you sure you want to delete this drink?
+      </h5>
+      <button className="delete-button" onClick={confirmButtonHandler}>
         Yes (Delete Drink)
       </button>
-      <button className="deleteDrinkButton" onClick={closeModal}>
+      <button className="cancel-button" onClick={closeModal}>
         No (Keep Drink)
       </button>
     </div>

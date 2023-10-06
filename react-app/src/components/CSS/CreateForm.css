@@ -1,0 +1,81 @@
+/* Container */
+.form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(90deg,
+      #ffd6ff 0%,
+      #e7c6ff 20%,
+      #c8b6ff 40%,
+      #b8c0ff 60%,
+      #bbd0ff 80%);
+  /* https://coolors.co/palette/ffd6ff-e7c6ff-c8b6ff-b8c0ff-bbd0ff */
+}
+
+.centered-content {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  width: auto;
+  max-width: 400px;
+  text-align: center;
+  margin: 0 auto;
+}
+
+/* Title */
+.form-title {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+/* Form */
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Label */
+.form-label {
+  margin: 10px 0;
+  font-size: 16px;
+  text-align: left;
+  width: 100%;
+  color: #333;
+}
+
+/* Input */
+.form-input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+/* Error message styles */
+.form-error-message {
+  color: #cb78ec;
+  margin: 5px 0;
+  font-size: 14px;
+}
+
+/* Submit button styles */
+.form-submit-button {
+  background-color: #bbd0ff;
+  color: #333;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 20px;
+}
+
+.form-submit-button:hover {
+  background-color: #c8b6ff;
+}

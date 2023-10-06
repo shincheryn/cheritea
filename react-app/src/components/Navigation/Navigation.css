@@ -1,0 +1,96 @@
+/* Navigation.css */
+
+/* Navigation Bar Container */
+.navbar {
+    background: linear-gradient(90deg,
+    #ffd6ff 0%,
+    #e7c6ff 20%,
+    #c8b6ff 40%,
+    #b8c0ff 60%,
+    #bbd0ff 80%);
+    color: #333;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  /* Logo */
+  .logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    text-decoration: none;
+  }
+
+  /* Navigation Links */
+  .nav-links {
+    list-style: none;
+    display: flex;
+    gap: 100px;
+  }
+
+  .nav-links li {
+    margin-right: 10px;
+  }
+
+  .nav-links a {
+    color: #333; /* Text color */
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  .nav-links a:hover {
+    color: #e7c6ff; /* Use the palette's second color on hover */
+  }
+
+  /* Profile Button */
+  .profile-button {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    color: #333; /* Text color */
+    text-decoration: none;
+  }
+
+  .profile-button i {
+    font-size: 24px;
+  }
+
+  /* Profile Dropdown */
+  .profile-dropdown {
+    position: absolute;
+    top: 40px; /* Adjust as needed */
+    right: 0;
+    background-color: #fff; /* Background color for the dropdown */
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    padding: 10px;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .profile-dropdown.hidden {
+    display: none;
+  }
+
+  .profile-dropdown li {
+    text-align: right;
+  }
+
+  .profile-dropdown button {
+    background-color: #ffd6ff; /* Use the palette's first color for the button */
+    color: #333; /* Text color */
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+
+  .profile-dropdown button:hover {
+    background-color: #e7c6ff; /* Use the palette's second color on hover */
+  }

@@ -1,0 +1,82 @@
+/* EditDrinkPage.css */
+
+/* Page Container */
+.page-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #ffd6ff;
+  }
+
+  /* Form Container */
+  .form-create {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    margin: 0 auto;
+  }
+
+  /* Form Title */
+  .form-create h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+  }
+
+  /* Error Message Container */
+  .error-message {
+    color: #cb78ec;
+    margin: 5px 0;
+    font-size: 14px;
+  }
+
+  /* Label Styles */
+  .label-create {
+    margin: 10px 0;
+    font-size: 16px;
+    text-align: left;
+    width: 100%;
+    color: #333;
+  }
+
+  /* Input Styles */
+  .input-create {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    margin-top: 10px;
+  }
+
+  /* File Input Styles */
+  .label-create input[type="file"] {
+    display: none;
+  }
+
+/* Image Styles */
+.label-create img {
+  max-width: 100%;
+  max-height: 200px;
+  width: auto;
+  height: auto;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+  /* Submit Button Styles */
+  button[type="submit"] {
+    background-color: #bbd0ff;
+    color: #333;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 20px;
+  }
+
+  button[type="submit"]:hover {
+    background-color: #c8b6ff;
+  }

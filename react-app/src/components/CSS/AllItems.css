@@ -1,0 +1,77 @@
+/* AllItems.css */
+
+/* Page Container */
+.page-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+
+  /* Title */
+  .title {
+    font-size: 28px;
+    margin-bottom: 20px;
+    color: #333;
+  }
+
+  /* Create Button Container */
+  .create-button-container {
+    margin-top: 20px;
+  }
+
+  /* Generic Button Styles */
+  .generic-button {
+    background-color: #e7c6ff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  /* Content Container */
+  .content-container {
+    margin-top: 20px;
+  }
+
+  /* Tile Container */
+  .tile-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  /* Generic Tile */
+  .generic-tile {
+    flex: 0 1 calc(33.33% - 20px);
+    box-sizing: border-box;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 20px;
+    text-align: center;
+  }
+
+  /* Link Styles */
+  .link {
+    text-decoration: none;
+    color: #333;
+    transition: color 0.3s ease;
+  }
+
+  .link:hover {
+    color: #bbd0ff;
+  }
+
+  /* Image Styles */
+  .image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+    margin-bottom: 10px;
+  }
+
+  /* Name Styles */
+  .name {
+    font-size: 18px;
+  }

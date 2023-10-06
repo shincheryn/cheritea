@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 import * as toppingsActions from "../../store/topping";
-import "./Toppings.css";
+import "../CSS/AllItems.css";
 
 const AllToppingsPage = () => {
   const dispatch = useDispatch();
@@ -18,11 +18,11 @@ const AllToppingsPage = () => {
     <div>
       <div className="page-container">
         <h1 className="title">Toppings</h1>
-        {user.isAdmin &&
+        {user?.isAdmin &&
           (toppings.length === 0 ? (
-            <div className="create-first-topping">
+            <div className="create-button-container">
               <button
-                className="upload-button"
+                className="generic-button"
                 onClick={(e) => {
                   e.stopPropagation();
                   history.push(`/toppings`);
@@ -32,9 +32,9 @@ const AllToppingsPage = () => {
               </button>
             </div>
           ) : (
-            <div className="topping-button">
+            <div className="create-button-container">
               <button
-                className="upload-button"
+                className="generic-button"
                 onClick={(e) => {
                   e.stopPropagation();
                   history.push(`/toppings/new`);
@@ -47,8 +47,8 @@ const AllToppingsPage = () => {
         <div className="tile-container">
           {/* if user isAdmin */}
           {toppings.map((topping) => (
-            <div key={topping.id} className="tile">
-              <Link to={`/toppings/${topping.id}`} className="topping-link">
+            <div key={topping.id} className="generic-tile">
+              <Link to={`/toppings/${topping.id}`} className="link">
                 <div>
                   <img
                     className="image"
@@ -57,7 +57,7 @@ const AllToppingsPage = () => {
                     title={topping.name}
                   />
                 </div>
-                <div className="topping-name">{topping.name}</div>
+                <div className="name">{topping.name}</div>
               </Link>
               <div className="button-container"></div>
             </div>

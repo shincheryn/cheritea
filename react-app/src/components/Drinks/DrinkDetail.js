@@ -42,6 +42,7 @@ const DrinkDetailsPage = () => {
         {!isLoading && !currentDrink && <div>Drink not found.</div>}
         {!isLoading && currentDrink && (
           <div>
+            <h1 className="drink-name">{currentDrink?.name}</h1>
             <img
               className="drink-image"
               key={currentDrink?.id}
@@ -50,7 +51,7 @@ const DrinkDetailsPage = () => {
               title={currentDrink?.name}
             />
             <p className="details">{currentDrink?.details}</p>
-            {user.isAdmin && (
+            {user?.isAdmin && (
               <button
                 onClick={(e) => {
                   e.stopPropagation();
@@ -60,12 +61,14 @@ const DrinkDetailsPage = () => {
                 Edit Drink
               </button>
             )}
-            <div className="button-container">
-              <OpenModalButton
-                modalComponent={<DeleteDrink drinkId={currentDrink.id} />}
-                buttonText="Delete"
-              />
-            </div>
+             {user?.isAdmin && ( // Conditionally render the Delete button for admin users
+              <div className="button-container">
+                <OpenModalButton
+                  modalComponent={<DeleteDrink drinkId={currentDrink.id} />}
+                  buttonText="Delete"
+                />
+              </div>
+            )}
           </div>
         )}
       </div>

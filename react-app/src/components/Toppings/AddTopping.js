@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import * as toppingActions from "../../store/topping";
+import "../CSS/CreateForm.css";
 
 const AddToppingPage = () => {
   const dispatch = useDispatch();
@@ -41,48 +42,44 @@ const AddToppingPage = () => {
   };
 
   return (
-    <div className="create-topping-container">
+    <div className="form-container">
       <div className="centered-content">
-        <h1 className="create-topping-title">Create a Topping</h1>
-        <form
-          className="create-topping-form"
-          onSubmit={handleSubmit}
-          encType="multipart/form-data"
-        >
+        <h1 className="form-title">Create a Topping</h1>
+        <form className="form" onSubmit={handleSubmit} encType="multipart/form-data">
           <div>
-            <label className="create-topping-label">
+            <label className="form-label">
               Topping Name
               <input
-                className="create-topping-input"
+                className="form-input"
                 type="text"
                 placeholder="Topping Name"
                 value={toppingName}
                 onChange={(e) => setToppingName(e.target.value)}
               />
             </label>
-            <label className="create-topping-label">
+            <label className="form-label">
               Topping Details
               <input
-                className="create-topping-input"
+                className="form-input"
                 type="text"
                 placeholder="Topping Details"
                 value={toppingDetails}
                 onChange={(e) => setToppingDetails(e.target.value)}
               />
             </label>
-            <label className="create-topping-label">
+            <label className="form-label">
               Topping Image Url
               <input
-                className="create-topping-input"
+                className="form-input"
                 type="text"
                 placeholder="Topping Image URL"
                 value={toppingImageUrl}
                 onChange={(e) => setToppingImageUrl(e.target.value)}
               />
             </label>
-            {error && <p className="create-topping-error-message">{error}</p>}
+            {error && <p className="form-error-message">{error}</p>}
           </div>
-          <button className="create-topping-submit-button" type="submit">
+          <button className="form-submit-button" type="submit">
             Submit
           </button>
         </form>
