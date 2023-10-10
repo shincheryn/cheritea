@@ -1,0 +1,80 @@
+/* LandingPage.css */
+
+/* Main Container */
+.landing-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  margin-top: 100px;
+  font-family: Monaco;
+}
+
+/* Header Style */
+.header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.headline {
+  font-size: 36px;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.subheadline {
+  font-size: 18px;
+  color: #333;
+}
+
+/* CTA Button */
+.cta-button {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #c2f8cb;
+  color: #333;
+  text-decoration: none;
+  border-radius: 5px;
+  border-color: #333;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+  margin-top: 20px;
+}
+
+.cta-button:hover {
+  background-color: #b3e9c7;
+  border-color: #333;
+  color: #333;
+}
+
+/* Image Container */
+.image-container {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+/* Landing Image */
+.landing-image {
+  max-width: 80%;
+  height: auto;
+  border-radius: 15px;
+}
+
+/* About Us */
+.about {
+  width: 100%;
+  max-width: 80%;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  margin-bottom: 40px;
+}
+
+.about p {
+  font-size: 16px;
+  color: #333;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}

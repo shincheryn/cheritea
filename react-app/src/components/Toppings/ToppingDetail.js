@@ -37,14 +37,14 @@ const ToppingDetailsPage = () => {
   }, [showModal]);
 
   return (
-    <div className="container">
-      <div className="topping-details-container">
+    <div className="item-page-container">
+      <div className="item-container">
         {!isLoading && !currentTopping && <div>Topping not found.</div>}
         {!isLoading && currentTopping && (
           <div>
-            <h1 className="topping-name">{currentTopping?.name}</h1>
+            <h1 className="item-name">{currentTopping?.name}</h1>
             <img
-              className="topping-image"
+              className="item-image"
               key={currentTopping?.id}
               src={currentTopping?.imageUrl}
               alt={currentTopping?.name}
@@ -52,19 +52,23 @@ const ToppingDetailsPage = () => {
             />
             <p className="details">{currentTopping?.details}</p>
             {user?.isAdmin && (
-              <button
-                onClick={(e) => {
-                  e.stopPropagation();
-                  history.push(`/toppings/${id}/edit`);
-                }}
-              >
-                Edit Topping
-              </button>
+              <div className="button-container">
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    history.push(`/toppings/${id}/edit`);
+                  }}
+                >
+                  Edit Topping
+                </button>
+              </div>
             )}
             {user?.isAdmin && (
               <div className="button-container">
                 <OpenModalButton
-                  modalComponent={<DeleteTopping toppingId={currentTopping.id} />}
+                  modalComponent={
+                    <DeleteTopping toppingId={currentTopping.id} />
+                  }
                   buttonText="Delete"
                 />
               </div>

@@ -92,6 +92,7 @@ const EditDrinkPage = () => {
               <label className="label-create">
                 Drink Details
                 <input
+                  className="input-create"
                   type="text"
                   name="drink-details"
                   placeholder="Drink Details"
@@ -105,7 +106,7 @@ const EditDrinkPage = () => {
                 Drink Image
                 <input
                   type="file"
-                  accept=".png, .jpg, .jpeg"
+                  accept="image/*"
                   onChange={(e) => setDrinkImage(e.target.files[0])}
                 />
               </label>

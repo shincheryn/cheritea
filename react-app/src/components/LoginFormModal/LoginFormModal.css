@@ -1,0 +1,76 @@
+/* Modal Title */
+.login-form-container h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #333;
+}
+.login-form-container {
+  background: white;
+  border-radius: 5px;
+  padding: 15px;
+}
+
+/* Error Messages */
+.login-form-errors ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  color: #cb78ec;
+  font-size: 14px;
+}
+
+.login-form-errors ul li {
+  margin: 5px 0;
+}
+
+/* Input Labels */
+.login-form-label {
+  font-size: 16px;
+  text-align: left;
+  color: #333;
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.login-form-label input {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+/* Log In Button */
+.login-form-submit-button[type="submit"] {
+  background-color: #bbd0ff;
+  color: #333;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 20px;
+  transition: background-color 0.3s ease;
+  font-family: Monaco;
+}
+
+.login-form-submit-button[type="submit"]:hover {
+  background-color: #c8b6ff;
+}
+
+/* Demo User Button */
+.demo-login-button[type="submit"] {
+  font-family: Monaco;
+  background-color: #bbd0ff;
+  color: #333;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 20px;
+  transition: background-color 0.3s ease;
+}
+
+.login-form-demo-button[type="submit"]:hover {
+  background-color: #c8b6ff;
+  font-family: Monaco;
+}

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import { signUp } from "../../store/session";
-import "./SignupForm.css";
+import "./SignupFormModal.css";
 
 function SignupFormModal() {
   const dispatch = useDispatch();
@@ -34,15 +34,15 @@ function SignupFormModal() {
   };
 
   return (
-    <>
+    <div className="signup-form-container">
       <h1>Sign Up</h1>
-      <form onSubmit={handleSubmit}>
-        <ul>
+      <form onSubmit={handleSubmit} className="signup-form">
+        <ul className="signup-form-errors">
           {errors.map((error, idx) => (
             <li key={idx}>{error}</li>
           ))}
         </ul>
-        <label>
+        <label className="signup-form-label">
           First Name
           <input
             type="text"
@@ -51,7 +51,7 @@ function SignupFormModal() {
             required
           />
         </label>
-        <label>
+        <label className="signup-form-label">
           Last Name
           <input
             type="text"
@@ -60,7 +60,7 @@ function SignupFormModal() {
             required
           />
         </label>
-        <label>
+        <label className="signup-form-label">
           Email
           <input
             type="text"
@@ -69,7 +69,7 @@ function SignupFormModal() {
             required
           />
         </label>
-        <label>
+        <label className="signup-form-label">
           Username
           <input
             type="text"
@@ -78,7 +78,7 @@ function SignupFormModal() {
             required
           />
         </label>
-        <label>
+        <label className="signup-form-label">
           Password
           <input
             type="password"
@@ -87,7 +87,7 @@ function SignupFormModal() {
             required
           />
         </label>
-        <label>
+        <label className="signup-form-label">
           Confirm Password
           <input
             type="password"
@@ -96,9 +96,9 @@ function SignupFormModal() {
             required
           />
         </label>
-        <button type="submit">Sign Up</button>
+        <button type="submit" className="signup-form-submit-button">Sign Up</button>
       </form>
-    </>
+    </div>
   );
 }
 

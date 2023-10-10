@@ -3,7 +3,7 @@ import { login } from "../../store/session";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import * as sessionActions from "../../store/session";
-import "./LoginForm.css";
+import "./LoginFormModal.css";
 
 function LoginFormModal() {
   const dispatch = useDispatch();
@@ -18,51 +18,51 @@ function LoginFormModal() {
     if (data) {
       setErrors(data);
     } else {
-      closeModal()
+      closeModal();
     }
   };
 
   const demoLogin = (e) => {
     e.preventDefault();
-    dispatch(sessionActions.login("demo@aa.io", "password"))
-    closeModal()
-  }
+    dispatch(sessionActions.login("demo@aa.io", "password"));
+    closeModal();
+  };
 
   return (
-    <>
-      <h1>Log In</h1>
-      <form onSubmit={handleSubmit} className="mm">
-        <ul className="mm">
+    <div className="login-form-container">
+      <h1>Login</h1>
+      <form onSubmit={handleSubmit} className="login-form">
+        <ul className="login-form-errors">
           {errors.map((error, idx) => (
             <li key={idx}>{error}</li>
           ))}
         </ul>
-        <label className="mm">
+        <label className="login-form-label">
           Email
           <input
-            type="texts"
+            type="text"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
-            className="mmInput"
+            className="login-form-input"
           />
         </label>
-        <label className="mm">
+        <label className="login-form-label">
           Password
           <input
-            type="texts"
+            type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
-            className="mmInput"
+            className="login-form-input"
           />
         </label>
-        <button type="submit">Log In</button>
+        <button type="submit" className="login-form-submit-button">Login</button>
       </form>
       <div>
-        <button onClick={demoLogin} type="submit">Demo User</button>
+        <button onClick={demoLogin} className="demo-login-button" type="submit">Demo User (Admin)</button>
       </div>
-    </>
+    </div>
   );
 }
 

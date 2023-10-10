@@ -4,6 +4,7 @@ import { useParams, useHistory } from "react-router-dom";
 import * as drinkActions from "../../store/drink";
 import OpenModalButton from "../OpenModalButton";
 import DeleteDrink from "./DeleteDrink";
+import "../CSS/AllDetails.css";
 
 const DrinkDetailsPage = () => {
   const { id } = useParams();
@@ -37,14 +38,14 @@ const DrinkDetailsPage = () => {
   }, [showModal]);
 
   return (
-    <div className="container">
-      <div className="drink-details-container">
+    <div className="item-page-container">
+      <div className="item-container">
         {!isLoading && !currentDrink && <div>Drink not found.</div>}
         {!isLoading && currentDrink && (
           <div>
-            <h1 className="drink-name">{currentDrink?.name}</h1>
+            <h1 className="item-name">{currentDrink?.name}</h1>
             <img
-              className="drink-image"
+              className="item-image"
               key={currentDrink?.id}
               src={currentDrink?.imageUrl}
               alt={currentDrink?.name}
@@ -52,16 +53,18 @@ const DrinkDetailsPage = () => {
             />
             <p className="details">{currentDrink?.details}</p>
             {user?.isAdmin && (
-              <button
-                onClick={(e) => {
-                  e.stopPropagation();
-                  history.push(`/drinks/${id}/edit`);
-                }}
-              >
-                Edit Drink
-              </button>
+              <div className="button-container">
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    history.push(`/drinks/${id}/edit`);
+                  }}
+                >
+                  Edit Drink
+                </button>
+              </div>
             )}
-             {user?.isAdmin && ( // Conditionally render the Delete button for admin users
+            {user?.isAdmin && (
               <div className="button-container">
                 <OpenModalButton
                   modalComponent={<DeleteDrink drinkId={currentDrink.id} />}

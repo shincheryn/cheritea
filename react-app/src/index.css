@@ -1,63 +1,72 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Global Styles */
+body {
+  font-family: Monaco;
+  background-color: #fff;
+  gap: 10px;
+}
+
+/* Root Element */
+#root {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+#modal-content {
+  background: transparent;
+}
+
+/* Main Container */
+#app-container {
+  width: 100%;
+  max-width: 1200px;
+  padding: 20px;
+}
+
+/* Link Styles */
+a {
+  text-decoration: none;
+  color: #333; /* Link color */
+}
+
+a:hover {
+  color: #e7c6ff;
+}
+
+/* Dynamic Background */
+body {
+  background: linear-gradient(
+    -45deg,
+    #ffd6ff,
+    #e7c6ff,
+    #c8b6ff,
+    #b8c0ff,
+    #bbd0ff
+  );
+  background-size: 400% 400%;
+  animation: gradient 5s ease infinite;
+  height: 100vh;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
   }
-
-  /* Define global styles for the entire application */
-  body {
-    font-family: Monaco;
-    background-color: #fff; /* Background color for the entire app */
-    gap: 10px
+  50% {
+    background-position: 100% 50%;
   }
-
-  /* Style the root element */
-  #root {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
+  100% {
+    background-position: 0% 50%;
   }
+}
 
-  /* Style the application's main container */
-  #app-container {
-    width: 100%;
-    max-width: 1200px;
-    padding: 20px;
-  }
-
-  /* Add styles for links */
-  a {
-    text-decoration: none;
-    color: #333; /* Link color */
-  }
-
-  a:hover {
-    color: #e7c6ff; /* Link color on hover */
-  }
-
-
-  /* Referencing CodePen */
-
-  body {
-    background: linear-gradient(-45deg, #FFD6FF, #E7C6FF, #C8B6FF, #B8C0FF, #BBD0FF);
-    background-size: 400% 400%;
-    animation: gradient 15s ease infinite;
-    height: 100vh;
-  }
-
-  @keyframes gradient {
-    0% {
-      background-position: 0% 50%;
-    }
-    50% {
-      background-position: 100% 50%;
-    }
-    100% {
-      background-position: 0% 50%;
-    }
-  }
-
-  /* COLORSCHEMES */
-  /* https://coolors.co/palettes/popular/purple */
+/* COLOR SCHEMES */
+/* https://coolors.co/palettes/popular/purple */

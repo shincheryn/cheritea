@@ -1,0 +1,63 @@
+/* Modal Title */
+.signup-form-container h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  gap: 40px;
+  color: #333;
+  padding: 10px;
+}
+
+/* Error Messages */
+.signup-form-errors ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  color: #cb78ec;
+  font-size: 14px;
+  margin-top: 15px;
+}
+
+.signup-form-container {
+  background: white;
+  border-radius: 5px;
+  padding: 15px;
+}
+
+.signup-form-errors ul li {
+  margin: 5px 0;
+}
+
+/* Input Labels */
+.signup-form-label {
+  font-size: 16px;
+  text-align: left;
+  color: #333;
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.signup-form-label input {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+/* Sign Up Button */
+.signup-form-submit-button[type="submit"] {
+  background-color: #bbd0ff;
+  color: #333;
+  padding: 15px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 20px;
+  transition: background-color 0.3s ease;
+  display: block;
+  width: 100%;
+  font-family: Monaco;
+}
+
+.signup-form-submit-button[type="submit"]:hover {
+  background-color: #c8b6ff;
+}

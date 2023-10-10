@@ -1,0 +1,65 @@
+/* AllDetailsPage.css */
+
+/* Page Container */
+.item-page-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Details Container */
+.item-container {
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  margin: 0 auto;
+}
+
+/* Item Name */
+.item-name {
+  font-size: 24px;
+  margin-top: 30px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+/* Item Image */
+.item-image {
+  width: 100%;
+  max-height: 400px;
+  object-fit: contain;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+/* Item Details */
+.item-details {
+  font-size: 18px;
+  color: #333;
+  text-align: center;
+}
+
+/* Button Container */
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+/* Edit and Delete Buttons */
+.button-container button {
+  background-color: rgb(193, 244, 214);
+  color: #333;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  font-family: Monaco;
+  transition: background-color 0.3s ease;
+}
+
+.button-container button:hover {
+  background-color: #8ec9a9;
+}

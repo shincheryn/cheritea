@@ -2,6 +2,7 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import ProfileButton from "./ProfileButton";
+import CreateOrderModal from "../Orders/CreateOrderModal";
 import "./Navigation.css";
 
 function Navigation({ isLoaded }) {
@@ -24,6 +25,9 @@ function Navigation({ isLoaded }) {
           <NavLink to="/toppings" className="nav-link">
             Toppings
           </NavLink>
+        </li>
+        <li>
+          <button onClick={CreateOrderModal}>Start an Order</button>
         </li>
         {isLoaded && (
           <li>

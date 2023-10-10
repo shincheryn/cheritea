@@ -7,7 +7,7 @@ import "../CSS/CreateForm.css";
 const AddToppingPage = () => {
   const dispatch = useDispatch();
   const history = useHistory();
-  const defaultToppingImage = "https://cdn4.iconfinder.com/data/icons/drinks-beverage-5/1000/Bubble_matcha-512.png";
+  const defaultToppingImage = "https://res.cloudinary.com/dvlsr70pm/image/upload/v1696815460/topping-default-image.png";
   const [toppingName, setToppingName] = useState("");
   const [toppingDetails, setToppingDetails] = useState("");
   const [toppingImageUrl, setToppingImageUrl] = useState("");

@@ -91,7 +91,7 @@ const EditToppingPage = () => {
               </div>
               <label className="label-create">
                 Topping Details
-                <input
+                <input className="input-create"
                   type="text"
                   name="topping-details"
                   placeholder="Topping Details"
