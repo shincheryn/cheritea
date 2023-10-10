@@ -31,13 +31,12 @@
 /* Navigation Links */
 .nav-links {
   list-style: none;
-  width:100^
+  width: 100%;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   margin-top: 20px;
   margin-bottom: 20px;
 }
-
 
 .nav-links a {
   color: var(--text-color);
@@ -64,6 +63,8 @@
 
 /* Profile Dropdown */
 .profile-dropdown {
+  position: fixed;
+  right: 10%;
   background-color: #fff;
   border: 1px solid #ddd;
   border-radius: 5px;
