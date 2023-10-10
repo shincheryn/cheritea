@@ -28,10 +28,10 @@ const AddDrinkPage = () => {
     }
 
     // Drink Name: If same name exists, throw error
-    if (drinkName) {
-      setError("Drink already exists");
-      return;
-    }
+    // if (drinkName) {
+    //   setError("Drink already exists");
+    //   return;
+    // }
 
     // Drink Image: If empty, make it defaultDrinkImage
     const imageUrlToUse =

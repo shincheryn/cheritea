@@ -27,10 +27,10 @@ const AddToppingPage = () => {
       return;
     }
 
-    if (toppingName) {
-      setError("Topping already exists");
-      return;
-    }
+    // if (toppingName) {
+    //   setError("Topping already exists");
+    //   return;
+    // }
 
     // Topping Image: If empty, make it defaultToppingImage
     const imageUrlToUse =
