@@ -12,22 +12,22 @@ def seed_order_toppings():
         orderId= 1, toppingId=3
     )
     ot4 = order_toppings.insert().values(
-        orderId= 2, toppingId=5
+        orderId= 2, toppingId=4
     )
     ot5 = order_toppings.insert().values(
-        orderId= 2, toppingId=6
+        orderId= 2, toppingId=5
     )
     ot6 = order_toppings.insert().values(
-        orderId= 2, toppingId=7
+        orderId= 2, toppingId=6
     )
     ot7 = order_toppings.insert().values(
-        orderId= 3, toppingId=9
+        orderId= 3, toppingId=7
     )
     ot8 = order_toppings.insert().values(
-        orderId= 3, toppingId=10
+        orderId= 3, toppingId=8
     )
     ot9 = order_toppings.insert().values(
-        orderId= 3, toppingId=11
+        orderId= 3, toppingId=9
     )
     db.session.execute(ot1)
     db.session.execute(ot2)
