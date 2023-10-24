@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import * as reviewActions from "../../store/review";
+import "../CSS/CreateForm.css";
 
 const CreateReviewPage = () => {
   const dispatch = useDispatch();
@@ -16,7 +17,7 @@ const CreateReviewPage = () => {
 
     // Review Text: If empty, throw an error
     if (reviewText.trim() === "") {
-      setError("Please add a review text");
+      setError("Please add a review");
       return;
     }
 
@@ -43,33 +44,33 @@ const CreateReviewPage = () => {
   };
 
   return (
-    <div className="create-review-container">
+    <div className="form-container">
       <div className="centered-content">
-        <h1 className="create-review-title">Create a Review</h1>
-        <form className="create-review-form" onSubmit={handleSubmit}>
+        <h1 className="form-title">Create a Review</h1>
+        <form className="form" onSubmit={handleSubmit}>
           <div>
-            <label className="create-review-label">
+            <label className="form-label">
               Review Text
               <textarea
-                className="create-review-input"
+                className="form-input"
                 placeholder="Review Text"
                 value={reviewText}
                 onChange={(e) => setReviewText(e.target.value)}
               />
             </label>
-            <label className="create-review-label">
+            <label className="form-label">
               Star Rating
               <input
-                className="create-review-input"
+                className="form-input"
                 type="number"
                 placeholder="Star Rating (1-5)"
                 value={reviewStars}
                 onChange={(e) => setReviewStars(e.target.value)}
               />
             </label>
-            {error && <p className="create-review-error-message">{error}</p>}
+            {error && <p className="form-error-message">{error}</p>}
           </div>
-          <button className="create-review-submit-button" type="submit">
+          <button className="form-submit-button" type="submit">
             Submit
           </button>
         </form>

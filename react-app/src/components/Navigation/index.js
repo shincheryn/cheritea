@@ -26,9 +26,18 @@ function Navigation({ isLoaded }) {
             Toppings
           </NavLink>
         </li>
-        <li>
-          <button onClick={CreateOrderModal}>Start an Order</button>
-        </li>
+        {sessionUser && (
+          <>
+            <li>
+              <button onClick={CreateOrderModal}>Start an Order</button>
+            </li>
+            <li>
+              <NavLink to="/orders" className="nav-link">
+                My Orders
+              </NavLink>
+            </li>
+          </>
+        )}
         {isLoaded && (
           <li>
             <ProfileButton user={sessionUser} />

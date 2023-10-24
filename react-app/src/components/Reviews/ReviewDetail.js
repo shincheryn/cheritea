@@ -4,6 +4,7 @@ import { useParams, useHistory } from "react-router-dom";
 import * as reviewActions from "../../store/review";
 import OpenModalButton from "../OpenModalButton";
 import DeleteReview from "./DeleteReview";
+import "../CSS/AllDetails.css";
 
 const ReviewDetailsPage = () => {
   const { orderId, reviewId } = useParams();
@@ -37,12 +38,12 @@ const ReviewDetailsPage = () => {
   }, [showModal]);
 
   return (
-    <div className="container">
-      <div className="review-details-container">
+    <div className="item-page-container">
+      <div className="item-container">
         {!isLoading && !currentReview && <div>Review not found.</div>}
         {!isLoading && currentReview && (
           <div>
-            <p className="review-text">{currentReview?.review}</p>
+            <p className="review-text"> Review: {currentReview?.review}</p>
             <p className="stars">Stars: {currentReview?.stars}</p>
             {user?.isAdmin && (
               <button

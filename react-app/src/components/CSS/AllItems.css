@@ -23,8 +23,8 @@
   justify-content: flex-end;
 }
 
-/* Generic Button Styles */
-.generic-button {
+/* Standard Button Styles */
+.standard-button {
   background-color: #c2f8cb;
   font-family: Monaco;
   color: #333;
@@ -47,8 +47,8 @@
   gap: 20px;
 }
 
-/* Generic Tile */
-.generic-tile {
+/* Standard Tile */
+.standard-tile {
   flex: 0 1 calc(33.33% - 20px);
   box-sizing: border-box;
   background-color: #fff;
@@ -83,6 +83,6 @@
 }
 
 /* Add New Drink Button Margins */
-.create-button-container .generic-button {
+.create-button-container .standard-button {
   margin-right: 20px;
 }

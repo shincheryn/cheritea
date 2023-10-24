@@ -1,4 +1,5 @@
 const LOAD_REVIEW_BY_ID = "reviews/reviewById";
+const LOAD_REVIEW_BY_DRINK_ID = "reviews/reviewByDrinkId";
 const ADD_REVIEW = "reviews/addReview";
 const EDIT_REVIEW = "reviews/editReview";
 const DELETE_REVIEW = "reviews/deleteReview";
@@ -6,6 +7,11 @@ const DELETE_REVIEW = "reviews/deleteReview";
 //Action Creators
 export const loadReviewById = (review) => ({
   type: LOAD_REVIEW_BY_ID,
+  payload: review,
+});
+
+export const loadReviewByDrinkId = (review) => ({
+  type: LOAD_REVIEW_BY_DRINK_ID,
   payload: review,
 });
 
@@ -31,6 +37,14 @@ export const loadReviewByIdThunk = (orderId) => async (dispatch) => {
     const review = await res.json();
     dispatch(loadReviewById(review));
     return review;
+  }
+};
+
+export const loadReviewByDrinkIdThunk = (drinkId) => async (dispatch) => {
+  const res = await fetch(`/api/drinks/${drinkId}`);
+  if (res.ok) {
+    const review = await res.json();
+    dispatch(loadReviewByDrinkId(review));
   }
 };
 
@@ -77,6 +91,9 @@ const reviewsReducer = (state = initialState, action) => {
   let newState = { ...state };
   switch (action.type) {
     case LOAD_REVIEW_BY_ID:
+      newState[action.payload.id] = action.payload;
+      return newState;
+    case LOAD_REVIEW_BY_DRINK_ID:
       newState[action.payload.id] = action.payload;
       return newState;
     case ADD_REVIEW:

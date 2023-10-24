@@ -4,6 +4,7 @@ import { Route, Switch } from "react-router-dom";
 import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation";
 import LandingPage from "./components/LandingPage";
+import ProtectedRoute from "./components/auth/ProtectedRoute";
 
 import AllDrinksPage from "./components/Drinks/";
 import DrinkDetailsPage from "./components/Drinks/DrinkDetail";
@@ -18,6 +19,8 @@ import ToppingDetailsPage from "./components/Toppings/ToppingDetail";
 import ReviewDetailsPage from "./components/Reviews/ReviewDetail";
 import CreateReviewPage from "./components/Reviews/CreateReview";
 import EditReviewPage from "./components/Reviews/EditReview";
+
+import MyOrdersPage from "./components/Orders";
 
 // import Cart from './components/Cart';
 
@@ -38,33 +41,36 @@ function App() {
           <Route exact path="/">
             <LandingPage />
           </Route>
-          <Route path="/drinks/new">
+          <ProtectedRoute path="/orders">
+            <MyOrdersPage />
+          </ProtectedRoute>
+          <ProtectedRoute path="/drinks/new">
             <AddDrinkPage />
-          </Route>
-          <Route path="/drinks/:id/edit">
+          </ProtectedRoute>
+          <ProtectedRoute path="/drinks/:id/edit">
             <EditDrinkPage />
-          </Route>
+          </ProtectedRoute>
           <Route path="/drinks/:id">
             <DrinkDetailsPage />
           </Route>
           <Route path="/drinks">
             <AllDrinksPage />
           </Route>
-          <Route path="/toppings/new">
+          <ProtectedRoute path="/toppings/new">
             <AddToppingPage />
-          </Route>
-          <Route path="/toppings/:id/edit">
+          </ProtectedRoute>
+          <ProtectedRoute path="/toppings/:id/edit">
             <EditToppingPage />
-          </Route>
+          </ProtectedRoute>
           <Route path="/toppings/:id">
             <ToppingDetailsPage />
           </Route>
           <Route path="/toppings">
             <AllToppingsPage />
           </Route>
-          <Route path="/reviews/create/:orderId">
+          <ProtectedRoute path="/reviews/create/:orderId">
             <CreateReviewPage />
-          </Route>
+          </ProtectedRoute>
           <Route path="/reviews/edit/:orderId/:reviewId">
             <EditReviewPage />
           </Route>

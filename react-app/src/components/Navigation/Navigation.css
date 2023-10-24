@@ -95,7 +95,6 @@
   text-align: left;
 }
 
-/* "Start an Order" Button */
 .navbar button {
   background: none;
   border: none;
@@ -107,7 +106,6 @@
   transition: color 0.3s ease;
 }
 
-/* "Start an Order" Button on Hover */
 .navbar button:hover {
   color: var(--link-hover-color);
 }

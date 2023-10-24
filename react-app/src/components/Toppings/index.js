@@ -22,7 +22,7 @@ const AllToppingsPage = () => {
           (toppings.length === 0 ? (
             <div className="create-button-container">
               <button
-                className="generic-button"
+                className="standard-button"
                 onClick={(e) => {
                   e.stopPropagation();
                   history.push(`/toppings`);
@@ -34,7 +34,7 @@ const AllToppingsPage = () => {
           ) : (
             <div className="create-button-container">
               <button
-                className="generic-button"
+                className="standard-button"
                 onClick={(e) => {
                   e.stopPropagation();
                   history.push(`/toppings/new`);
@@ -47,7 +47,7 @@ const AllToppingsPage = () => {
         <div className="tile-container">
           {/* if user isAdmin */}
           {toppings.map((topping) => (
-            <div key={topping.id} className="generic-tile">
+            <div key={topping.id} className="standard-tile">
               <Link to={`/toppings/${topping.id}`} className="link">
                 <div>
                   <img

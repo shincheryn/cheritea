@@ -88,8 +88,10 @@ button[type="submit"] {
   cursor: pointer;
   font-size: 16px;
   margin-top: 20px;
+  font-family: Monaco;
 }
 
 button[type="submit"]:hover {
   background-color: #c8b6ff;
+  font-family: Monaco;
 }

@@ -22,7 +22,7 @@ const AllDrinksPage = () => {
           (drinks.length === 0 ? (
             <div className="create-button-container">
               <button
-                className="generic-button"
+                className="standard-button"
                 onClick={(e) => {
                   e.stopPropagation();
                   history.push(`/drinks`);
@@ -34,7 +34,7 @@ const AllDrinksPage = () => {
           ) : (
             <div className="create-button-container">
               <button
-                className="generic-button"
+                className="standard-button"
                 onClick={(e) => {
                   e.stopPropagation();
                   history.push(`/drinks/new`);
@@ -47,7 +47,7 @@ const AllDrinksPage = () => {
         <div className="tile-container">
           {/* if user isAdmin */}
           {drinks.map((drink) => (
-            <div key={drink.id} className="generic-tile">
+            <div key={drink.id} className="standard-tile">
               <Link to={`/drinks/${drink.id}`} className="link">
                 <div>
                   <img

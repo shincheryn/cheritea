@@ -2,6 +2,7 @@ import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import { useHistory } from "react-router-dom";
 import * as reviewActions from "../../store/review";
+import "../CSS/DeleteForm.css";
 
 function DeleteReview({ reviewId }) {
   const dispatch = useDispatch();
@@ -15,13 +16,15 @@ function DeleteReview({ reviewId }) {
   };
 
   return (
-    <div>
-      <h1>Confirm Delete</h1>
-      <h5>Are you sure you want to delete this review?</h5>
-      <button className="deleteReviewButton" onClick={confirmButtonHandler}>
+    <div className="delete-form-container">
+      <h1 className="delete-form-title">Confirm Delete</h1>
+      <h5 className="delete-form-message">
+        Are you sure you want to delete this review?
+      </h5>
+      <button className="delete-button" onClick={confirmButtonHandler}>
         Yes (Delete Review)
       </button>
-      <button className="deleteReviewButton" onClick={closeModal}>
+      <button className="cancel-button" onClick={closeModal}>
         No (Keep Review)
       </button>
     </div>

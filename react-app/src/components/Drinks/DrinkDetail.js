@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
 import * as drinkActions from "../../store/drink";
+import * as reviewActions from "../../store/review";
 import OpenModalButton from "../OpenModalButton";
 import DeleteDrink from "./DeleteDrink";
 import "../CSS/AllDetails.css";
@@ -11,11 +12,17 @@ const DrinkDetailsPage = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const ulRef = useRef();
+  const reviews = useSelector((state) =>
+    Object.values(state.reviews).filter(
+      (review) => review?.drinkId === parseInt(id)
+    )
+  );
 
   const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     dispatch(drinkActions.loadDrinkByIdThunk(id));
+    dispatch(reviewActions.loadReviewByDrinkIdThunk(id));
   }, [dispatch, id]);
 
   const currentDrink = useSelector((state) => state.drinks[id]);
@@ -52,6 +59,17 @@ const DrinkDetailsPage = () => {
               title={currentDrink?.name}
             />
             <p className="details">{currentDrink?.details}</p>
+
+            {/* Reviews */}
+            <div className="item-page-container">
+              {Object.values(reviews).map((review) => (
+                <div key={review?.id} className="review">
+                  <p className="review-text"> Reviews:{review?.review}</p>
+                  <p className="stars">Stars: {review?.stars}</p>
+                </div>
+              ))}
+            </div>
+
             {user?.isAdmin && (
               <div className="button-container">
                 <button
