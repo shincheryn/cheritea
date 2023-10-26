@@ -2,7 +2,8 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import ProfileButton from "./ProfileButton";
-import CreateOrderModal from "../Orders/CreateOrderModal";
+import CreateOrderModal from "../Orders/CreateOrder";
+import OpenModalButton from "../OpenModalButton";
 import "./Navigation.css";
 
 function Navigation({ isLoaded }) {
@@ -29,7 +30,10 @@ function Navigation({ isLoaded }) {
         {sessionUser && (
           <>
             <li>
-              <button onClick={CreateOrderModal}>Start an Order</button>
+              <OpenModalButton
+                buttonText="Start an Order"
+                modalComponent={<CreateOrderModal />}
+              />
             </li>
             <li>
               <NavLink to="/orders" className="nav-link">

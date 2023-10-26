@@ -1,24 +1,25 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { loadAllDrinksThunk, loadDrinkByIdThunk } from "../../store/drink";
-import { loadAllToppingsThunk, loadToppingByIdThunk } from "../../store/topping";
+import { useModal } from "../../context/Modal";
+import * as drinkActions from "../../store/drink";
 import * as cartActions from "../../store/cart";
 
-const CreateOrderModal = ({ closeModal }) => {
+function CreateOrderModal() {
   const dispatch = useDispatch();
   const history = useHistory();
-  const drinks = useSelector((state) => Object.values(state.drinks));
-  const toppings = useSelector((state) => Object.values(state.toppings));
+  const [drinks, setDrinks] = useState([]);
+  const [toppings, setToppings] = useState([]);
   const [selectedDrinkId, setSelectedDrinkId] = useState("");
   const [selectedToppings, setSelectedToppings] = useState([]);
   const [error, setError] = useState("");
+  const { closeModal } = useModal();
 
   const handleSelectDrink = async (e) => {
     const drinkId = e.target.value;
     setSelectedDrinkId(drinkId);
     if (drinkId) {
-      await dispatch(loadDrinkByIdThunk(drinkId));
+      await dispatch(drinkActions.loadDrinkByIdThunk(drinkId));
     }
   };
 
@@ -50,7 +51,7 @@ const CreateOrderModal = ({ closeModal }) => {
         toppingIds: selectedToppings,
       })
     );
-    history.push("/cart/");
+    history.push("/");
   };
 
   return (
@@ -96,6 +97,6 @@ const CreateOrderModal = ({ closeModal }) => {
       </form>
     </div>
   );
-};
+}
 
 export default CreateOrderModal;
