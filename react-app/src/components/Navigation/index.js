@@ -5,6 +5,8 @@ import ProfileButton from "./ProfileButton";
 import CreateOrderModal from "../Orders/CreateOrder";
 import OpenModalButton from "../OpenModalButton";
 import "./Navigation.css";
+import CartPageModal from "../Orders/CartPage";
+import shoppingCart from "./shopping-cart.png";
 
 function Navigation({ isLoaded }) {
   const sessionUser = useSelector((state) => state.session.user);
@@ -39,6 +41,16 @@ function Navigation({ isLoaded }) {
               <NavLink to="/orders" className="nav-link">
                 My Orders
               </NavLink>
+            </li>
+            <li>
+              <OpenModalButton
+                buttonText={
+                  <span>
+                    <img src={shoppingCart} alt="Shopping Cart" />
+                  </span>
+                }
+                modalComponent={<CartPageModal />}
+              />
             </li>
           </>
         )}

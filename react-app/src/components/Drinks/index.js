@@ -4,21 +4,33 @@ import { Link, useHistory } from "react-router-dom";
 import * as drinksActions from "../../store/drink";
 import "../CSS/AllItems.css";
 
-const AllDrinksPage = () => {
+const AllDrinksPage = (props) => {
   const dispatch = useDispatch();
   const history = useHistory();
   const drinks = useSelector((state) => Object.values(state.drinks));
   const user = useSelector((state) => state.session.user);
+  const inModal = props.inModal;
+  const onDrinkSelected = props.onDrinkSelected;
+  const selectedDrinkId = props.selectedDrinkId;
 
   useEffect(() => {
     dispatch(drinksActions.loadAllDrinksThunk());
   }, [dispatch]);
+
+  const handleItemClick = (drinkId) => {
+    if (inModal && onDrinkSelected) {
+      onDrinkSelected(drinkId);
+    } else if (!inModal) {
+      history.push(`/drinks/${drinkId}`);
+    }
+  };
 
   return (
     <div>
       <div className="page-container">
         <h1 className="title">Drinks</h1>
         {user?.isAdmin &&
+          !inModal &&
           (drinks.length === 0 ? (
             <div className="create-button-container">
               <button
@@ -44,21 +56,27 @@ const AllDrinksPage = () => {
               </button>
             </div>
           ))}
-        <div className="tile-container">
+        <div className={`tile-container${inModal ? " inModal" : ""}`}>
           {/* if user isAdmin */}
           {drinks.map((drink) => (
-            <div key={drink.id} className="standard-tile">
-              <Link to={`/drinks/${drink.id}`} className="link">
-                <div>
-                  <img
-                    className="image"
-                    src={drink.imageUrl}
-                    alt={drink.name}
-                    title={drink.name}
-                  />
-                </div>
-                <div className="name">{drink.name}</div>
-              </Link>
+            <div
+              key={drink.id}
+              className={`standard-tile ${
+                drink.id == selectedDrinkId ? "selected" : ""
+              }`}
+            >
+              <div
+                onClick={() => handleItemClick(drink.id)}
+                style={{ cursor: inModal ? "pointer" : "default" }}
+              >
+                <img
+                  className="image"
+                  src={drink.imageUrl}
+                  alt={drink.name}
+                  title={drink.name}
+                />
+              </div>
+              <div className="name">{drink.name}</div>
               <div className="button-container"></div>
             </div>
           ))}

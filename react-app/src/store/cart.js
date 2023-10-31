@@ -2,6 +2,7 @@ const INCREASE_ITEM_QUANTITY = "cart/increaseCartItemQuantity";
 const DECREASE_ITEM_QUANTITY = "cart/decreaseCartItemQuantity";
 const ADD_CART_ITEM = "cart/addCartItem";
 const REMOVE_CART_ITEM = "cart/removeCartItem";
+const SUBMIT_CART_ITEMS = "cart/submitCartItems";
 
 //Action Creators
 export const increaseCartItemQuantity = (cartIndex) => ({
@@ -24,6 +25,30 @@ export const removeCartItem = (cartIndex) => ({
   payload: cartIndex,
 });
 
+export const submitCartItems = (orders) => ({
+  type: SUBMIT_CART_ITEMS,
+  payload: orders,
+});
+
+
+//Thunk
+export const submitCartItemsThunk = (orders) => async (dispatch) => {
+  const res = await fetch(`/api/orders/`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(orders),
+  });
+
+  if (res.ok) {
+    const order = await res.json();
+    dispatch(submitCartItems(orders));
+    return order;
+  }
+};
+
+
 //Reducer
 const initialState = [];
 const cartReducer = (state = initialState, action) => {
@@ -44,9 +69,11 @@ const cartReducer = (state = initialState, action) => {
         newState.splice(action.payload, 1);
       }
       return newState;
+    case SUBMIT_CART_ITEMS:
+      return initialState;
     default:
       return state;
   }
-}
+};
 
 export default cartReducer;

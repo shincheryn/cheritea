@@ -4,35 +4,35 @@ import { useHistory } from "react-router-dom";
 import { useModal } from "../../context/Modal";
 import * as drinkActions from "../../store/drink";
 import * as cartActions from "../../store/cart";
+import AllDrinksPage from "../Drinks";
+import AllToppingsPage from "../Toppings";
+import "./CreateOrder.css";
 
 function CreateOrderModal() {
   const dispatch = useDispatch();
   const history = useHistory();
-  const [drinks, setDrinks] = useState([]);
-  const [toppings, setToppings] = useState([]);
   const [selectedDrinkId, setSelectedDrinkId] = useState("");
   const [selectedToppings, setSelectedToppings] = useState([]);
   const [error, setError] = useState("");
   const { closeModal } = useModal();
 
-  const handleSelectDrink = async (e) => {
-    const drinkId = e.target.value;
+  const handleSelectDrink = async (drinkId) => {
     setSelectedDrinkId(drinkId);
-    if (drinkId) {
-      await dispatch(drinkActions.loadDrinkByIdThunk(drinkId));
-    }
   };
 
-  const handleSelectTopping = (e) => {
-    const toppingId = e.target.value;
-    if (e.target.checked) {
+  const handleSelectTopping = async (toppingId) => {
+    if (!selectedToppings.includes(toppingId)) {
       setSelectedToppings([...selectedToppings, toppingId]);
     } else {
-      setSelectedToppings(selectedToppings.filter((id) => id !== toppingId));
+      setSelectedToppings([
+        ...selectedToppings.filter((id) => {
+          return id != toppingId;
+        }),
+      ]);
     }
   };
 
-  const handleSubmit = async (e) => {
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
 
     if (!selectedDrinkId) {
@@ -51,6 +51,7 @@ function CreateOrderModal() {
         toppingIds: selectedToppings,
       })
     );
+    closeModal();
     history.push("/");
   };
 
@@ -58,36 +59,28 @@ function CreateOrderModal() {
     <div className="create-order-modal">
       <h3>Create Your Order</h3>
       {error && <div className="error">{error}</div>}
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleFormSubmit}>
         <div className="form-group">
           <label>Select a Drink:</label>
-          <select
-            onChange={handleSelectDrink}
-            value={selectedDrinkId}
-            className="form-control"
-          >
-            <option value="">Select a Drink</option>
-            {drinks.map((drink) => (
-              <option key={drink.id} value={drink.id}>
-                {drink.name}
-              </option>
-            ))}
-          </select>
+          <div className="select-item">
+            <AllDrinksPage
+              inModal={true}
+              onDrinkSelected={handleSelectDrink}
+              selectedDrinkId={selectedDrinkId}
+            />
+          </div>
         </div>
         <div className="form-group">
           <label>Select Toppings (choose up to 3):</label>
-          {toppings.map((topping) => (
-            <div key={topping.id} className="form-check">
-              <input
-                value={topping.id}
-                onChange={handleSelectTopping}
-                checked={selectedToppings.includes(topping.id)}
-                className="form-check-input"
-              />
-              <label className="form-check-label">{topping.name}</label>
-            </div>
-          ))}
+          <div className="select-item">
+            <AllToppingsPage
+              inModal={true}
+              onToppingSelected={handleSelectTopping}
+              selectedToppingIds={selectedToppings}
+            />
+          </div>
         </div>
+
         <button type="submit" className="primary-button">
           Add to Cart
         </button>

@@ -20,8 +20,6 @@ import ReviewDetailsPage from "./components/Reviews/ReviewDetail";
 import CreateReviewPage from "./components/Reviews/CreateReview";
 import EditReviewPage from "./components/Reviews/EditReview";
 
-import CreateOrderModal from "./components/Orders/CreateOrder";
-
 import MyOrdersPage from "./components/Orders";
 
 // import Cart from './components/Cart';
@@ -44,7 +42,6 @@ function App() {
             <LandingPage />
           </Route>
           <ProtectedRoute path="/orders">
-            <CreateOrderModal />
             <MyOrdersPage />
           </ProtectedRoute>
           <ProtectedRoute path="/drinks/new">
@@ -57,7 +54,7 @@ function App() {
             <DrinkDetailsPage />
           </Route>
           <Route path="/drinks">
-            <AllDrinksPage />
+            <AllDrinksPage inModal={false} />
           </Route>
           <ProtectedRoute path="/toppings/new">
             <AddToppingPage />
@@ -69,7 +66,7 @@ function App() {
             <ToppingDetailsPage />
           </Route>
           <Route path="/toppings">
-            <AllToppingsPage />
+            <AllToppingsPage inModal={false} />
           </Route>
           <ProtectedRoute path="/reviews/create/:orderId">
             <CreateReviewPage />
