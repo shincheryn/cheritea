@@ -40,10 +40,10 @@ function CreateOrderModal() {
       return;
     }
 
-    if (selectedToppings.length > 3) {
-      setError("Please select a maximum of three toppings");
-      return;
-    }
+    // if (selectedToppings.length > 3) {
+    //   setError("Please select a maximum of three toppings");
+    //   return;
+    // }
 
     await dispatch(
       cartActions.addCartItem({

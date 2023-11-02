@@ -30,6 +30,7 @@ def get_order_history(userId):
 
 # Helper Funtion for Create and Editing Orders
 def validate_order_data(data):
+    print(data)
     if not data:
         return {'error': 'Invalid request data'}, 400
     drinkId = data.get("drinkId", -1)
@@ -53,7 +54,6 @@ def validate_order_data(data):
 @login_required
 def create_order():
     data = request.json
-
     errors, status = validate_order_data(data)
     if errors:
         return jsonify(errors), status

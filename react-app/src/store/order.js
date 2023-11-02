@@ -26,7 +26,7 @@ export const deleteOrder = (orderId) => ({
 
 //Thunks
 export const loadOrdersByUserIdThunk = (userId) => async (dispatch) => {
-  const res = await fetch(`/api/orders/${userId}`);
+  const res = await fetch(`/api/orders/user/${userId}`);
   if (res.ok) {
     const orders = await res.json();
     dispatch(loadOrdersByUserId(orders));
@@ -34,10 +34,13 @@ export const loadOrdersByUserIdThunk = (userId) => async (dispatch) => {
   }
 };
 
-export const addOrderThunk = (orderId, newOrder) => async (dispatch) => {
-  const res = await fetch(`/api/orders/${orderId}`, {
+export const addOrderThunk = (newOrder) => async (dispatch) => {
+  const res = await fetch("/api/orders/", {
     method: "POST",
-    body: newOrder,
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(newOrder),
   });
 
   if (res.ok) {
@@ -50,7 +53,10 @@ export const addOrderThunk = (orderId, newOrder) => async (dispatch) => {
 export const editOrderThunk = (orderId, updatedOrder) => async (dispatch) => {
   const res = await fetch(`/api/orders/${orderId}`, {
     method: "PUT",
-    body: updatedOrder,
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(updatedOrder),
   });
 
   if (res.ok) {

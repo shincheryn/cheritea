@@ -19,7 +19,14 @@ const AllToppingsPage = (props) => {
 
   const handleItemClick = (toppingId) => {
     if (inModal && onToppingSelected) {
-      onToppingSelected(toppingId);
+      if (
+        selectedToppingIds.includes(toppingId) ||
+        selectedToppingIds.length < 3
+      ) {
+        onToppingSelected(toppingId);
+      } else {
+        alert("You can only select up to 3 toppings.");
+      }
     } else if (!inModal) {
       history.push(`/toppings/${toppingId}`);
     }
@@ -63,7 +70,9 @@ const AllToppingsPage = (props) => {
             <div
               key={topping.id}
               className={`standard-tile ${
-                selectedToppingIds.includes(topping.id) ? "selected" : ""
+                selectedToppingIds && selectedToppingIds.includes(topping.id)
+                  ? "selected"
+                  : ""
               }`}
             >
               <div

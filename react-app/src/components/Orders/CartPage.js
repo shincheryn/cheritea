@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
+import { useModal } from "../../context/Modal";
 import { useDispatch, useSelector } from "react-redux";
 import * as cartActions from "../../store/cart";
 import * as drinkActions from "../../store/drink";
 import * as toppingActions from "../../store/topping";
+import * as orderActions from "../../store/order";
 import "./CartPage.css";
 
 const CartPageModal = () => {
@@ -11,6 +14,8 @@ const CartPageModal = () => {
   const toppings = useSelector((state) => state.toppings);
   const [submittedOrders, setSubmittedOrders] = useState([]);
   const dispatch = useDispatch();
+  const history = useHistory();
+  const { closeModal } = useModal();
 
   const loadDrink = async (order) => {
     dispatch(drinkActions.loadDrinkByIdThunk(order.drinkId));
@@ -40,10 +45,19 @@ const CartPageModal = () => {
     };
   };
 
-  const submitOrderHandler = () => {
-    dispatch(cartActions.submitCartItems(submittedOrders))
-    setSubmittedOrders([]);
-  }
+  const isCartEmpty = cart.length === 0;
+  const submitOrderHandler = async () => {
+    await Promise.all(
+      cart.map(async (orderRecord) => {
+        for (var i = 0; i < orderRecord.quantity; i++) {
+          await dispatch(orderActions.addOrderThunk(orderRecord.order));
+        }
+      })
+    );
+    await dispatch(cartActions.emptyCartItems());
+    closeModal();
+    history.push("/orders/");
+  };
 
   useEffect(() => {
     cart.forEach((orderRecord) => {
@@ -51,7 +65,6 @@ const CartPageModal = () => {
       loadToppings(orderRecord.order);
     });
   }, [dispatch, cart]);
-
 
   return (
     <div className="cart-page">
@@ -88,8 +101,10 @@ const CartPageModal = () => {
               </div>
             </div>
           ))}
-
         </div>
+      )}
+      {isCartEmpty ? null : (
+        <button onClick={submitOrderHandler}>Submit Order</button>
       )}
     </div>
   );
