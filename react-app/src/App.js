@@ -21,6 +21,7 @@ import CreateReviewPage from "./components/Reviews/CreateReview";
 import EditReviewPage from "./components/Reviews/EditReview";
 
 import MyOrdersPage from "./components/Orders";
+import EditOrderPage from "./components/Orders/EditOrder";
 
 // import Cart from './components/Cart';
 
@@ -41,6 +42,9 @@ function App() {
           <Route exact path="/">
             <LandingPage />
           </Route>
+          <ProtectedRoute path="/orders/:id/edit">
+            <EditOrderPage />
+          </ProtectedRoute>
           <ProtectedRoute path="/orders">
             <MyOrdersPage />
           </ProtectedRoute>

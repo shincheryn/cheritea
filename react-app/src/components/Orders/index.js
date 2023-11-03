@@ -7,18 +7,24 @@ import * as cartActions from "../../store/cart";
 import OpenModalButton from "../OpenModalButton";
 import DeleteOrder from "./DeleteOrder";
 import "../CSS/AllItems.css";
+import CreateOrderModal from "./CreateOrder";
 
 const MyOrdersPage = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const order = useSelector((state) => Object.values(state.orders));
   const user = useSelector((state) => state.session.user);
-  const [orderDetails, setOrderDetails] = useState("");
+  const [time, setTime] = useState(new Date());
+  const msToSec = 1000;
+  const secToMin = 60;
 
   useEffect(() => {
     dispatch(orderActions.loadOrdersByUserIdThunk(user.id));
+    const interval = setInterval(() => {
+      setTime(new Date());
+    }, 1000);
+    return () => clearInterval(interval);
   }, [dispatch, user.id]);
-  
 
   return (
     <div>
@@ -33,20 +39,26 @@ const MyOrdersPage = () => {
                     <p>Order Number: {order.id}</p>
                     <p>Drink: {order.order_drink.name}</p>
                     {order.toppings.map((topping, index) => (
-                      <p>
+                      <p key={topping.id}>
                         Topping {index + 1}: {topping.name}
                       </p>
                     ))}
-                    <div className="button-container">
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          history.push(`/orders/${user}/edit`);
-                        }}
-                      >
-                        Edit Order
-                      </button>
-                    </div>
+                    {(time - new Date(order.createdAt)) / msToSec / secToMin <
+                      1 && (
+                      <div className="button-container">
+                        <OpenModalButton
+                          modalComponent={
+                            <CreateOrderModal orderId={order.id} />
+                          }
+                          buttonText={`${
+                            secToMin -
+                            Math.ceil(
+                              (time - new Date(order.createdAt)) / msToSec
+                            )
+                          } seconds to Edit`}
+                        />
+                      </div>
+                    )}
                     <div className="button-container">
                       <OpenModalButton
                         modalComponent={<DeleteOrder orderId={order.id} />}

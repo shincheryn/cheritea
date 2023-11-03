@@ -1,4 +1,5 @@
 const LOAD_ORDERS_BY_USER_ID = "orders/ordersByUserId";
+const LOAD_ORDER_BY_ID = "orders/orderById";
 const ADD_ORDER = "orders/addOrder";
 const EDIT_ORDER = "orders/editOrder";
 const DELETE_ORDER = "orders/deleteOrder";
@@ -7,6 +8,11 @@ const DELETE_ORDER = "orders/deleteOrder";
 export const loadOrdersByUserId = (orders) => ({
   type: LOAD_ORDERS_BY_USER_ID,
   payload: orders,
+});
+
+export const loadOrderById = (order) => ({
+  type: LOAD_ORDER_BY_ID,
+  payload: order,
 });
 
 export const addOrder = (order) => ({
@@ -31,6 +37,14 @@ export const loadOrdersByUserIdThunk = (userId) => async (dispatch) => {
     const orders = await res.json();
     dispatch(loadOrdersByUserId(orders));
     return orders;
+  }
+};
+export const loadOrderByIdThunk = (orderId) => async (dispatch) => {
+  const res = await fetch(`/api/orders/${orderId}`);
+  if (res.ok) {
+    const order = await res.json();
+    dispatch(loadOrderById(order));
+    return order;
   }
 };
 
@@ -86,6 +100,9 @@ const ordersReducer = (state = initialState, action) => {
       action.payload.forEach((ea) => {
         newState[ea.id] = ea;
       });
+      return newState;
+    case LOAD_ORDER_BY_ID:
+      newState[action.payload.id] = action.payload;
       return newState;
     case ADD_ORDER:
       newState[action.payload.id] = action.payload;

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import * as orderActions from "../../store/order";
-import * as drinkActions from "../../store/drink"; 
+import * as drinkActions from "../../store/drink";
 import "../CSS/EditForm.css";
 
 const EditOrderPage = () => {
@@ -21,6 +21,7 @@ const EditOrderPage = () => {
       dispatch(orderActions.loadOrderByIdThunk(id))
         .then((order) => {
           if (order) {
+            console.log(order);
             setDrinkId(order.drinkId);
             setToppingIds(order.toppings.map((t) => t.id));
           }
@@ -46,7 +47,7 @@ const EditOrderPage = () => {
     } else {
       setErrors({});
 
-      dispatch(editOrderThunk(id, updatedOrder))
+      dispatch(orderActions.editOrderThunk(id, updatedOrder))
         .then((order) => {
           console.log(order);
           history.push(`/orders/${id}/`);

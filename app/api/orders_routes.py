@@ -27,6 +27,17 @@ def get_order_history(userId):
     orders_details = [get_order_details(order) for order in orders]
     return jsonify(orders_details)
 
+# GET Order Based on Order Id (Order History)
+@orders_routes.route('/<int:orderId>', methods=['GET'])
+@login_required
+def get_order_by_id(orderId):
+    order = Order.query.get(orderId)
+    if order:
+        if current_user.id != order.userId and not current_user.isAdmin:
+            return {'errors': ["Unauthorized user"]}, 403
+        return jsonify(get_order_details(order))
+    return jsonify({'error': 'Order not found'}), 404
+
 
 # Helper Funtion for Create and Editing Orders
 def validate_order_data(data):

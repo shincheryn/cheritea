@@ -1,20 +1,36 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { useModal } from "../../context/Modal";
-import * as drinkActions from "../../store/drink";
+import * as orderActions from "../../store/order";
 import * as cartActions from "../../store/cart";
 import AllDrinksPage from "../Drinks";
 import AllToppingsPage from "../Toppings";
 import "./CreateOrder.css";
 
-function CreateOrderModal() {
+function CreateOrderModal(props) {
   const dispatch = useDispatch();
   const history = useHistory();
   const [selectedDrinkId, setSelectedDrinkId] = useState("");
   const [selectedToppings, setSelectedToppings] = useState([]);
   const [error, setError] = useState("");
   const { closeModal } = useModal();
+  const orderId = props.orderId;
+
+  useEffect(() => {
+    if (orderId !== undefined) {
+      dispatch(orderActions.loadOrderByIdThunk(orderId))
+        .then((order) => {
+          if (order) {
+            setSelectedDrinkId(order.drinkId);
+            setSelectedToppings(order.toppings.map((t) => t.id));
+          }
+        })
+        .catch((err) => {
+          console.error("Error fetching order details:", err);
+        });
+    }
+  }, [dispatch, orderId]);
 
   const handleSelectDrink = async (drinkId) => {
     setSelectedDrinkId(drinkId);
@@ -44,15 +60,24 @@ function CreateOrderModal() {
     //   setError("Please select a maximum of three toppings");
     //   return;
     // }
-
-    await dispatch(
-      cartActions.addCartItem({
-        drinkId: selectedDrinkId,
-        toppingIds: selectedToppings,
-      })
-    );
-    closeModal();
-    history.push("/");
+    if (orderId === undefined) {
+      await dispatch(
+        cartActions.addCartItem({
+          drinkId: selectedDrinkId,
+          toppingIds: selectedToppings,
+        })
+      );
+      closeModal();
+      history.push("/");
+    } else {
+      await dispatch(
+        orderActions.editOrderThunk(orderId, {
+          drinkId: selectedDrinkId,
+          toppingIds: selectedToppings,
+        })
+      );
+      closeModal();
+    }
   };
 
   return (
@@ -82,7 +107,7 @@ function CreateOrderModal() {
         </div>
 
         <button type="submit" className="primary-button">
-          Add to Cart
+          {orderId === undefined ? "Add to Cart" : "Update Order"}
         </button>
         <button type="button" onClick={closeModal} className="secondary-button">
           Cancel
