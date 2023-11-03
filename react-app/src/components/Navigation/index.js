@@ -6,7 +6,7 @@ import CreateOrderModal from "../Orders/CreateOrder";
 import OpenModalButton from "../OpenModalButton";
 import "./Navigation.css";
 import CartPageModal from "../Orders/CartPage";
-import shoppingCart from "./shopping-cart.png";
+import shoppingCart from "./shopping-cartt.png";
 
 function Navigation({ isLoaded }) {
   const sessionUser = useSelector((state) => state.session.user);

@@ -49,7 +49,7 @@
   font-size: 16px;
   margin-top: 20px;
   transition: background-color 0.3s ease;
-  font-family: Monaco;
+  font-family: Comfortaa;
 }
 
 .login-form-submit-button[type="submit"]:hover {
@@ -58,7 +58,7 @@
 
 /* Demo User Button */
 .demo-login-button[type="submit"] {
-  font-family: Monaco;
+  font-family: Comfortaa;
   background-color: #bbd0ff;
   color: #333;
   padding: 10px 20px;
@@ -72,5 +72,5 @@
 
 .login-form-demo-button[type="submit"]:hover {
   background-color: #c8b6ff;
-  font-family: Monaco;
+  font-family: Comfortaa;
 }

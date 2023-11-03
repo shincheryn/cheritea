@@ -34,17 +34,19 @@ const MyOrdersPage = () => {
           {order && order.length > 0 ? (
             order.map((order) => (
               <div key={order.id} className="standard-tile">
-                <Link to={`/orders/${order.id}`} className="link">
-                  <div>
-                    <p>Order Number: {order.id}</p>
-                    <p>Drink: {order.order_drink.name}</p>
-                    {order.toppings.map((topping, index) => (
-                      <p key={topping.id}>
-                        Topping {index + 1}: {topping.name}
-                      </p>
-                    ))}
-                    {(time - new Date(order.createdAt)) / msToSec / secToMin <
-                      1 && (
+                <div>
+                  <p>Order Number: {order.id}</p>
+                  <p className="order-drink-text">
+                    Drink: {order.order_drink.name}
+                  </p>
+                  {order.toppings.map((topping, index) => (
+                    <p className="order-topping-text" key={topping.id}>
+                      Topping {index + 1}: {topping.name}
+                    </p>
+                  ))}
+                  {(time - new Date(order.createdAt)) / msToSec / secToMin <
+                  1 ? (
+                    <div>
                       <div className="button-container">
                         <OpenModalButton
                           modalComponent={
@@ -58,15 +60,24 @@ const MyOrdersPage = () => {
                           } seconds to Edit`}
                         />
                       </div>
-                    )}
-                    <div className="button-container">
-                      <OpenModalButton
-                        modalComponent={<DeleteOrder orderId={order.id} />}
-                        buttonText="Delete"
-                      />
+                      <div className="button-container">
+                        <OpenModalButton
+                          modalComponent={<DeleteOrder orderId={order.id} />}
+                          buttonText={`${
+                            secToMin -
+                            Math.ceil(
+                              (time - new Date(order.createdAt)) / msToSec
+                            )
+                          } seconds to Delete`}
+                        />
+                      </div>
                     </div>
-                  </div>
-                </Link>
+                  ) : (
+                    <p className="order-submitted-text">
+                      Order has been submitted.
+                    </p>
+                  )}
+                </div>
               </div>
             ))
           ) : (

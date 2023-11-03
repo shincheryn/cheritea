@@ -36,7 +36,7 @@
 .label-create {
   margin: 10px 0;
   font-size: 15px;
-  font-family: Monaco;
+  font-family: Comfortaa;
   text-align: left;
   padding-bottom: 10px;
   width: 100%;
@@ -52,7 +52,7 @@
   border: 1px solid #ccc;
   border-radius: 5px;
   font-size: 14px;
-  font-family: Monaco;
+  font-family: Comfortaa;
   margin-top: 10px;
   text-wrap: balance;
 }
@@ -61,7 +61,7 @@
 .label-create input[type="file"] {
   display: inline-block;
   margin-right: 10px;
-  font-family: Monaco;
+  font-family: Comfortaa;
   font-size: 14px;
   color: #333;
   margin-top: 10px;
@@ -88,10 +88,10 @@ button[type="submit"] {
   cursor: pointer;
   font-size: 16px;
   margin-top: 20px;
-  font-family: Monaco;
+  font-family: Comfortaa;
 }
 
 button[type="submit"]:hover {
   background-color: #c8b6ff;
-  font-family: Monaco;
+  font-family: Comfortaa;
 }

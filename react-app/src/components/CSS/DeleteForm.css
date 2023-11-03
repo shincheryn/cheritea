@@ -33,7 +33,7 @@
 /* Button Styles (Delete and Cancel) */
 .delete-button,
 .cancel-button {
-  font-family: Monaco;
+  font-family: Comfortaa;
   background-color: var(--button-bg-color);
   color: var(--button-color);
   padding: 10px 20px;

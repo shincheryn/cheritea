@@ -56,10 +56,6 @@ function CreateOrderModal(props) {
       return;
     }
 
-    // if (selectedToppings.length > 3) {
-    //   setError("Please select a maximum of three toppings");
-    //   return;
-    // }
     if (orderId === undefined) {
       await dispatch(
         cartActions.addCartItem({
