@@ -78,7 +78,7 @@ const DrinkDetailsPage = () => {
                     history.push(`/drinks/${id}/edit`);
                   }}
                 >
-                  Edit Drink
+                  edit drink
                 </button>
               </div>
             )}
@@ -86,7 +86,7 @@ const DrinkDetailsPage = () => {
               <div className="button-container">
                 <OpenModalButton
                   modalComponent={<DeleteDrink drinkId={currentDrink.id} />}
-                  buttonText="Delete"
+                  buttonText="delete drink"
                 />
               </div>
             )}

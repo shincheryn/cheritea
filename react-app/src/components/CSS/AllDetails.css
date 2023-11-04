@@ -11,7 +11,7 @@
 .item-container {
   padding: 20px;
   background-color: white;
-  border-radius: 10px;
+  border-radius: 20px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   text-align: center;
   margin: 0 auto;
@@ -31,6 +31,7 @@
   max-height: 300px;
   object-fit: contain;
   border-radius: 10px;
+  margin-bottom: 30px;
 }
 
 /* Item Details */
@@ -62,4 +63,12 @@
 
 .button-container button:hover {
   background-color: #8ec9a9;
+}
+
+
+.details{
+  align-items: center;
+  line-height: 30px;
+  max-width: 60%;
+  margin-left: 20%;
 }

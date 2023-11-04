@@ -59,7 +59,7 @@ const ToppingDetailsPage = () => {
                     history.push(`/toppings/${id}/edit`);
                   }}
                 >
-                  Edit Topping
+                  edit topping
                 </button>
               </div>
             )}
@@ -69,7 +69,7 @@ const ToppingDetailsPage = () => {
                   modalComponent={
                     <DeleteTopping toppingId={currentTopping.id} />
                   }
-                  buttonText="Delete"
+                  buttonText="delete topping"
                 />
               </div>
             )}
