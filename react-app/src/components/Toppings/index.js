@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import * as toppingsActions from "../../store/topping";
 import "../CSS/AllItems.css";
 
@@ -59,7 +59,7 @@ const AllToppingsPage = (props) => {
                   history.push(`/toppings/new`);
                 }}
               >
-                Add a New Topping
+                add a new topping
               </button>
             </div>
           ))}
@@ -69,23 +69,20 @@ const AllToppingsPage = (props) => {
           {toppings.map((topping) => (
             <div
               key={topping.id}
+              onClick={() => handleItemClick(topping.id)}
+              style={{ cursor: inModal ? "pointer" : "default" }}
               className={`standard-tile ${
                 selectedToppingIds && selectedToppingIds.includes(topping.id)
                   ? "selected"
                   : ""
               }`}
             >
-              <div
-                onClick={() => handleItemClick(topping.id)}
-                style={{ cursor: inModal ? "pointer" : "default" }}
-              >
-                <img
-                  className="image"
-                  src={topping.imageUrl}
-                  alt={topping.name}
-                  title={topping.name}
-                />
-              </div>
+              <img
+                className="image"
+                src={topping.imageUrl}
+                alt={topping.name}
+                title={topping.name}
+              />
               <div className="name">{topping.name}</div>
               <div className="button-container"></div>
             </div>

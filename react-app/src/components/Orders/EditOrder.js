@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import * as orderActions from "../../store/order";
-import * as drinkActions from "../../store/drink";
 import "../CSS/EditForm.css";
 
 const EditOrderPage = () => {
@@ -62,20 +61,20 @@ const EditOrderPage = () => {
     <>
       <div className="page-container">
         <div className="form-create">
-          <h1>Update Order</h1>
+          <h1>update order</h1>
           <form onSubmit={handleSubmit}>
             <div>
               <div className="error-message">
                 {errors.drinkId && <p className="">{errors.drinkId}</p>}
               </div>
               <label className="label-create">
-                Select a Drink
+                select a drink
                 <select
                   className="input-create"
                   value={drinkId}
                   onChange={(e) => setDrinkId(e.target.value)}
                 >
-                  <option value="">Select a Drink</option>
+                  <option value="">select a drink</option>
                 </select>
               </label>
             </div>
@@ -84,7 +83,7 @@ const EditOrderPage = () => {
                 {errors.toppingIds && <p className="">{errors.toppingIds}</p>}
               </div>
               <label className="label-create">
-                Select Toppings
+                select toppings
                 <select
                   className="input-create"
                   multiple
@@ -99,7 +98,7 @@ const EditOrderPage = () => {
                 ></select>
               </label>
             </div>
-            <button type="submit">Submit</button>
+            <button type="submit">submit</button>
           </form>
         </div>
       </div>

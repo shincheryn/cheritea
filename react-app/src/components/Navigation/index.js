@@ -16,37 +16,37 @@ function Navigation({ isLoaded }) {
       <ul className="nav-links">
         <li>
           <NavLink exact to="/" className="nav-link">
-            Home
+            home
           </NavLink>
         </li>
         <li>
           <NavLink to="/drinks" className="nav-link">
-            Drinks
+            drinks
           </NavLink>
         </li>
         <li>
           <NavLink to="/toppings" className="nav-link">
-            Toppings
+            toppings
           </NavLink>
         </li>
         {sessionUser && (
           <>
             <li>
               <OpenModalButton
-                buttonText="Start an Order"
+                buttonText="start an order"
                 modalComponent={<CreateOrderModal />}
               />
             </li>
             <li>
               <NavLink to="/orders" className="nav-link">
-                My Orders
+                my orders
               </NavLink>
             </li>
             <li>
               <OpenModalButton
                 buttonText={
                   <span>
-                    <img src={shoppingCart} alt="Shopping Cart" />
+                    <img className="shopping-cart-img" src={shoppingCart} alt="Shopping Cart" />
                   </span>
                 }
                 modalComponent={<CartPageModal />}

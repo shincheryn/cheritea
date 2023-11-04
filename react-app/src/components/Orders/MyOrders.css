@@ -1,0 +1,40 @@
+.form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+h4 {
+  font-size: 18px;
+  color: #4da768;
+  font-weight: bold;
+}
+
+.order-tile-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.order-drink-text {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  text-align: left;
+  font-size: 15px;
+}
+
+.order-topping-text {
+  margin-top: 5px;
+  text-align: left;
+  font-size: 12px;
+}
+
+.order-submitted-text {
+  margin-top: 20px;
+  color: #4da768;
+}
+
+#modal {
+  overflow: scroll;
+}

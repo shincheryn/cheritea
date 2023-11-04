@@ -111,7 +111,7 @@ const EditDrinkPage = () => {
                 />
               </label>
               {drink?.imageUrl && (
-                <img src={drink.imageUrl} alt="Current Drink Image" />
+                <img src={drink.imageUrl} alt="Current Drink" />
               )}
             </div>
             <button type="submit">Submit</button>

@@ -110,7 +110,7 @@ const EditToppingPage = () => {
                 />
               </label>
               {topping?.imageUrl && (
-                <img src={topping.imageUrl} alt="Current Topping Image" />
+                <img src={topping.imageUrl} alt="Current Topping" />
               )}
             </div>
             <button type="submit">Submit</button>

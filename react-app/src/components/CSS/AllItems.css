@@ -13,6 +13,7 @@
   font-size: 28px;
   margin-top: 20px;
   margin-bottom: 20px;
+  margin-left: 20px;
   color: #333;
 }
 
@@ -53,9 +54,10 @@
   box-sizing: border-box;
   background-color: #fff;
   border: 1px solid #ddd;
-  border-radius: 5px;
+  border-radius: 35px;
   padding: 20px;
   text-align: center;
+  cursor: pointer;
 }
 
 /* Link Styles */
@@ -71,18 +73,22 @@
 
 /* Image Styles */
 .image {
-  width: 100%;
-  max-height: 200px;
+  width: 90%;
+  max-height: 180px;
   object-fit: contain;
   margin-bottom: 10px;
+  cursor: pointer;
 }
 
 /* Name Styles */
 .name {
   font-size: 18px;
+  margin-top: 10px
 }
 
-/* Add New Drink Button Margins */
+/* Add New Item Button Margins */
 .create-button-container .standard-button {
-  margin-right: 20px;
+  margin-right: 40px;
+  margin-top: -10px;
+  margin-bottom: 20px;
 }

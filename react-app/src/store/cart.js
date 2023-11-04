@@ -30,27 +30,36 @@ export const emptyCartItems = () => ({
 });
 
 //Reducer
-const initialState = [];
+const initialState =
+  sessionStorage.getItem("cart") == null
+    ? []
+    : JSON.parse(sessionStorage.getItem("cart"));
+console.log(initialState);
 const cartReducer = (state = initialState, action) => {
   let newState = [...state];
   switch (action.type) {
     case ADD_CART_ITEM:
       newState.push({ order: action.payload, quantity: 1 });
+      sessionStorage.setItem("cart", JSON.stringify(newState));
       return newState;
     case REMOVE_CART_ITEM:
       newState.splice(action.payload, 1);
+      sessionStorage.setItem("cart", JSON.stringify(newState));
       return newState;
     case INCREASE_ITEM_QUANTITY:
       newState[action.payload].quantity += 1;
+      sessionStorage.setItem("cart", JSON.stringify(newState));
       return newState;
     case DECREASE_ITEM_QUANTITY:
       newState[action.payload].quantity -= 1;
       if (newState[action.payload].quantity === 0) {
         newState.splice(action.payload, 1);
       }
+      sessionStorage.setItem("cart", JSON.stringify(newState));
       return newState;
     case EMPTY_CART_ITEMS:
-      return initialState;
+      sessionStorage.setItem("cart", JSON.stringify([]));
+      return [];
     default:
       return state;
   }

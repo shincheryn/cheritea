@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import * as drinksActions from "../../store/drink";
 import "../CSS/AllItems.css";
 
@@ -52,7 +52,7 @@ const AllDrinksPage = (props) => {
                   history.push(`/drinks/new`);
                 }}
               >
-                Add a New Drink
+                add a new drink
               </button>
             </div>
           ))}
@@ -60,15 +60,14 @@ const AllDrinksPage = (props) => {
           {/* if user isAdmin */}
           {drinks.map((drink) => (
             <div
+              onClick={() => handleItemClick(drink.id)}
+              style={{ cursor: inModal ? "pointer" : "default" }}
               key={drink.id}
               className={`standard-tile ${
                 drink.id == selectedDrinkId ? "selected" : ""
               }`}
             >
-              <div
-                onClick={() => handleItemClick(drink.id)}
-                style={{ cursor: inModal ? "pointer" : "default" }}
-              >
+              <div>
                 <img
                   className="image"
                   src={drink.imageUrl}

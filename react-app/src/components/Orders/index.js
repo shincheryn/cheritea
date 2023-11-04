@@ -1,12 +1,11 @@
 // My Orders Page (with details and reviews)
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import * as orderActions from "../../store/order";
-import * as cartActions from "../../store/cart";
 import OpenModalButton from "../OpenModalButton";
 import DeleteOrder from "./DeleteOrder";
-import "../CSS/AllItems.css";
+import "./MyOrders.css";
 import CreateOrderModal from "./CreateOrder";
 
 const MyOrdersPage = () => {
@@ -30,18 +29,18 @@ const MyOrdersPage = () => {
     <div>
       <div className="page-container">
         <h1 className="title">My Orders</h1>
-        <div className="tile-container">
+        <div className="order-tile-container">
           {order && order.length > 0 ? (
             order.map((order) => (
               <div key={order.id} className="standard-tile">
                 <div>
-                  <p>Order Number: {order.id}</p>
+                  <h4>order # {order.id}</h4>
                   <p className="order-drink-text">
-                    Drink: {order.order_drink.name}
+                    {order.order_drink.name} with :
                   </p>
                   {order.toppings.map((topping, index) => (
                     <p className="order-topping-text" key={topping.id}>
-                      Topping {index + 1}: {topping.name}
+                      # {index + 1} : {topping.name}
                     </p>
                   ))}
                   {(time - new Date(order.createdAt)) / msToSec / secToMin <
@@ -57,7 +56,7 @@ const MyOrdersPage = () => {
                             Math.ceil(
                               (time - new Date(order.createdAt)) / msToSec
                             )
-                          } seconds to Edit`}
+                          } seconds to edit`}
                         />
                       </div>
                       <div className="button-container">
@@ -68,13 +67,13 @@ const MyOrdersPage = () => {
                             Math.ceil(
                               (time - new Date(order.createdAt)) / msToSec
                             )
-                          } seconds to Delete`}
+                          } seconds to delete`}
                         />
                       </div>
                     </div>
                   ) : (
                     <p className="order-submitted-text">
-                      Order has been submitted.
+                      order has been submitted.
                     </p>
                   )}
                 </div>

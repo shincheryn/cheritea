@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { useModal } from "../../context/Modal";
 import * as orderActions from "../../store/order";
@@ -7,6 +7,7 @@ import * as cartActions from "../../store/cart";
 import AllDrinksPage from "../Drinks";
 import AllToppingsPage from "../Toppings";
 import "./CreateOrder.css";
+import CartPageModal from "./CartPage";
 
 function CreateOrderModal(props) {
   const dispatch = useDispatch();
@@ -14,7 +15,7 @@ function CreateOrderModal(props) {
   const [selectedDrinkId, setSelectedDrinkId] = useState("");
   const [selectedToppings, setSelectedToppings] = useState([]);
   const [error, setError] = useState("");
-  const { closeModal } = useModal();
+  const { setModalContent, closeModal } = useModal();
   const orderId = props.orderId;
 
   useEffect(() => {
@@ -52,7 +53,7 @@ function CreateOrderModal(props) {
     e.preventDefault();
 
     if (!selectedDrinkId) {
-      setError("Please select a drink");
+      alert("Please select a drink.");
       return;
     }
 
@@ -63,8 +64,7 @@ function CreateOrderModal(props) {
           toppingIds: selectedToppings,
         })
       );
-      closeModal();
-      history.push("/");
+      setModalContent(<CartPageModal></CartPageModal>);
     } else {
       await dispatch(
         orderActions.editOrderThunk(orderId, {
@@ -82,7 +82,7 @@ function CreateOrderModal(props) {
       {error && <div className="error">{error}</div>}
       <form onSubmit={handleFormSubmit}>
         <div className="form-group">
-          <label>Select a Drink:</label>
+          <label className="order-form-label"> select a drink :</label>
           <div className="select-item">
             <AllDrinksPage
               inModal={true}
@@ -92,7 +92,9 @@ function CreateOrderModal(props) {
           </div>
         </div>
         <div className="form-group">
-          <label>Select Toppings (choose up to 3):</label>
+          <label className="order-form-label">
+            select toppings (choose up to 3):
+          </label>
           <div className="select-item">
             <AllToppingsPage
               inModal={true}
@@ -103,10 +105,10 @@ function CreateOrderModal(props) {
         </div>
 
         <button type="submit" className="primary-button">
-          {orderId === undefined ? "Add to Cart" : "Update Order"}
+          {orderId === undefined ? "add to cart" : "update order"}
         </button>
-        <button type="button" onClick={closeModal} className="secondary-button">
-          Cancel
+        <button type="submit" onClick={closeModal} className="primary-button">
+          cancel
         </button>
       </form>
     </div>

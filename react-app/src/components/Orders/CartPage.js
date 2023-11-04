@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { useModal } from "../../context/Modal";
 import { useDispatch, useSelector } from "react-redux";
@@ -7,15 +7,15 @@ import * as drinkActions from "../../store/drink";
 import * as toppingActions from "../../store/topping";
 import * as orderActions from "../../store/order";
 import "./CartPage.css";
+import CreateOrderModal from "./CreateOrder";
 
 const CartPageModal = () => {
   const cart = useSelector((state) => state.cart);
   const drinks = useSelector((state) => state.drinks);
   const toppings = useSelector((state) => state.toppings);
-  const [submittedOrders, setSubmittedOrders] = useState([]);
   const dispatch = useDispatch();
   const history = useHistory();
-  const { closeModal } = useModal();
+  const { setModalContent, closeModal } = useModal();
 
   const loadDrink = async (order) => {
     dispatch(drinkActions.loadDrinkByIdThunk(order.drinkId));
@@ -45,6 +45,10 @@ const CartPageModal = () => {
     };
   };
 
+  const addOrderHandler = () => {
+    setModalContent(<CreateOrderModal></CreateOrderModal>);
+  };
+
   const isCartEmpty = cart.length === 0;
   const submitOrderHandler = async () => {
     await Promise.all(
@@ -60,10 +64,16 @@ const CartPageModal = () => {
   };
 
   useEffect(() => {
+    // const storedCart = localStorage.getItem("cart");
+    // if(cart !== storedCart){
+    //   var mergedCart = merge(storedCart, cart, (a, b) => a.order == b.order)
+    //   setState(state => ({ ...state, cart: storedCart }));
+    // }
     cart.forEach((orderRecord) => {
       loadDrink(orderRecord.order);
       loadToppings(orderRecord.order);
     });
+    // localStorage.setItem("cart", cart);
   }, [dispatch, cart]);
 
   return (
@@ -74,18 +84,18 @@ const CartPageModal = () => {
       ) : (
         <div className="order-list">
           {cart.map((orderRecord, index) => (
-            <div className="order" key={index}>
+            <div className="cart-container" key={index}>
               <div className="order-header">
-                <h3>Order {index + 1}</h3>
-                <h3>Quantity: {orderRecord.quantity}</h3>
+                <h3>Order # {index + 1}</h3>
+                <h3>Quantity : {orderRecord.quantity}</h3>
               </div>
               {/* Order's drink.name based on selected drinkId */}
               <p>{drinks[orderRecord.order.drinkId]?.name}</p>
-              <h4>
+              <h5>
                 {orderRecord.order.toppingIds.length > 0
-                  ? "Toppings:"
+                  ? "with :"
                   : "No Toppings"}
-              </h4>
+              </h5>
               {/* Order's topping.name based on selected toppingIds */}
               <ul>
                 {orderRecord.order.toppingIds.map((toppingId) => (
@@ -94,7 +104,7 @@ const CartPageModal = () => {
               </ul>
               <div>
                 <button onClick={removeOrderHandler(index)}>
-                  Remove Order
+                  remove order
                 </button>
                 <button onClick={increaseQuantityHandler(index)}>+ 1</button>
                 <button onClick={decreaseQuantityHandler(index)}>- 1</button>
@@ -104,8 +114,11 @@ const CartPageModal = () => {
         </div>
       )}
       {isCartEmpty ? null : (
-        <button onClick={submitOrderHandler}>Submit Order</button>
+        <button onClick={submitOrderHandler}>submit</button>
       )}
+      <button onClick={addOrderHandler}>
+        {isCartEmpty ? "start an" : "add another"} order
+      </button>
     </div>
   );
 };
