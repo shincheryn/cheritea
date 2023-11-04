@@ -94,7 +94,7 @@ const CartPageModal = () => {
               <h5>
                 {orderRecord.order.toppingIds.length > 0
                   ? "with :"
-                  : "No Toppings"}
+                  : "no toppings"}
               </h5>
               {/* Order's topping.name based on selected toppingIds */}
               <ul>

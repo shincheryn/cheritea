@@ -14,14 +14,13 @@
 
 .cart-page h2 {
   font-size: 24px;
-  margin-top: 700px;
+  margin-top: 300px;
   margin-bottom: 16px;
 }
 
 .cart-page .order-list {
   display: flex;
   flex-direction: column;
-  gap: 20px;
 }
 
 .cart-page .order {

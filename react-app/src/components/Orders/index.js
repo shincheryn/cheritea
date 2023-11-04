@@ -36,7 +36,7 @@ const MyOrdersPage = () => {
                 <div>
                   <h4>order # {order.id}</h4>
                   <p className="order-drink-text">
-                    {order.order_drink.name} with :
+                    {order.order_drink.name}
                   </p>
                   {order.toppings.map((topping, index) => (
                     <p className="order-topping-text" key={topping.id}>
