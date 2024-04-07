@@ -18,7 +18,7 @@ Check out the live version of Cheritea [here](https://cheritea.onrender.com/). E
 
 ```bash
 pipenv install -r requirements.txt
-```
+``` 
 
 **3. Configuration:** Create an .env file based on the example provided, ensuring proper settings for your development environment.
 
