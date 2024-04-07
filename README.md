@@ -8,7 +8,7 @@ Check out the live version of Cheritea [here](https://cheritea.onrender.com/). E
 **Backend:** Python, Flask <br />
 **Database:** PostgreSQL <br />
 **Frontend:** React, Redux <br />
-**Cloud Services:** AWS (Amazon Web Services) <br />
+**Cloud Services:** AWS (Amazon Web Services) <br /> 
 
 ## GitHub Access: Getting Started
 
