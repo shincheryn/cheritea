@@ -14,7 +14,7 @@ Check out the live version of Cheritea [here](https://cheritea.onrender.com/). E
 
 **1. Clone the Repository:** Start by cloning this repository, focusing on the main branch.
 
-**2. Install Dependencies:** Run the following command to install the required dependencies:
+**2. Install Dependencies:** Run the following command to install the required dependencies: 
 
 ```bash
 pipenv install -r requirements.txt
