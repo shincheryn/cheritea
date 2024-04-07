@@ -28,7 +28,7 @@ pipenv install -r requirements.txt
 
 **6. Database Setup and Flask App:** Within your pipenv, execute the following commands to migrate your database, seed it, and run your Flask app:
 
-```bash
+```bash 
 pipenv shell
 ```
    
