@@ -1,7 +1,7 @@
 ## Cheritea - Spilling Happiness Into Your Communitea 🍵
 
 Welcome to Cheritea! If you have a passion for milk tea and a love for unique flavors, you've come to the right place. Cheritea allows users to explore and order delightful tea creations, complete with distinctive flavors and toppings. Even better, users can modify or cancel their orders seamlessly. Indulge in the world of cheritea, where every sip is a new experience.
-
+ 
 Check out the live version of Cheritea [here](https://cheritea.onrender.com/). Experience the joy of selecting and customizing your perfect cup of tea right from your browser.
 
 ## Technologies Used
